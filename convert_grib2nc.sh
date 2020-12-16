@@ -66,13 +66,13 @@ nm=`expr ${n} - 1`
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    fi
    
-   ls
-   rm tmp_*.nc 
    
-   cdo cat tp_cf_* ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_f01-${daysum}.nc
    
    n=`expr ${n} + 1`
 done
+   rm tmp_*.nc 
+   
+   cdo cat tp_cf_* ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_f01-${daysum}.nc
 
 HC=`expr ${HC} + 1`
 done
