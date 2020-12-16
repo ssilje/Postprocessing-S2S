@@ -52,16 +52,24 @@ while [ ${n} -le ${daynum}  ] ; do
 nm=`expr ${n} - 1`
 #echo $nm
  
-   if [ $n -eq 1 ]; then
-   cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
-   elif [ $n -le 9 ]; then
   
-   ncdiff tmp_0${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc
+   
+   if[ $n -le 9 ]; then
+     elif [ $n -eq 1 ]; then
+     cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
+     else
+     ncdiff tmp_0${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc
+     fi
    elif [ $n -eq 10  ]; then
    ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    else 
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    fi
+   
+   rm tmp_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_f01-${daysum}.nc
+   
+   cdo cat tp_cf_* 
+   
    n=`expr ${n} + 1`
 done
 
