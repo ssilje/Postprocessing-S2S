@@ -55,10 +55,10 @@ echo $nm
    if [ $n == 1 ]
    then
    cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
-   elif [ $n =< 9  ]
+   else if [ $n =< 9  ]
   
    ncdiff tmp_0${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc
-   elif [ $n == 10  ]
+   else if [ $n == 10  ]
    ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    else 
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
