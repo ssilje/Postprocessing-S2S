@@ -59,9 +59,10 @@ if [ $n -lt 10 ]; then
   
    elif [ $n -eq 10  ]; then
      ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-   else
+   elif  [ $n -gt 0 && $n -lt 10 ]; then
    ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
   fi
+  
   else 
    ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
    fi
