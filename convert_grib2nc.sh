@@ -48,9 +48,9 @@ daynum=$(echo | ls -L | wc -l)
 echo $daynum
 n=1
 while [ ${n} -le ${daynum}  ] ; do 
-echo $n
+#echo $n
 nm=`expr ${n} - 1`
-echo $nm
+#echo $nm
  
    if [ $n == 1 ]; then
    cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
@@ -62,6 +62,7 @@ echo $nm
    else 
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    fi
+   n=`expr ${n} + 1`
 done
 
 HC=`expr ${HC} + 1`
