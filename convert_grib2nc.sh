@@ -54,7 +54,7 @@ nm=`expr ${n} - 1`
  
   
    
-   if[ $n -le 9 ]; then
+   if [ $n -le 9 ]; then
      if [ $n -eq 1 ]; then
      cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
      else
