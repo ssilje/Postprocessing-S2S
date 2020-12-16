@@ -25,5 +25,8 @@ echo $yHC
 echo $day
 echo $date
 echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
+cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/work.$$/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
 HC=`expr ${HC} + 1`
+
+
 done
