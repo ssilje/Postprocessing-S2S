@@ -49,11 +49,15 @@ echo $daynum
 
 for n in ${daynum}
 do
+echo $n
+nm=`expr ${n} - 1`
+echo $nm
+ 
    if [ $n == 1 ]
    then
    tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc = tmp_${n}.nc
    else 
-   nm=`expr ${n} - 1`
+  
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    fi
 done
