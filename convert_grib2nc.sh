@@ -66,6 +66,7 @@ nm=`expr ${n} - 1`
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    fi
    
+   ls
    rm tmp_*.nc 
    
    cdo cat tp_cf_* ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_f01-${daysum}.nc
