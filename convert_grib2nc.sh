@@ -52,12 +52,12 @@ while [ ${n} -le ${daynum}  ] ; do
 nm=`expr ${n} - 1`
 #echo $nm
  
-   if [ $n == 1 ]; then
+   if [ $n -eq 1 ]; then
    cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
-   elif [ $n =< 9 ]; then
+   elif [ $n -le 9 ]; then
   
    ncdiff tmp_0${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc
-   elif [ $n == 10  ]; then
+   elif [ $n -eq 10  ]; then
    ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    else 
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
