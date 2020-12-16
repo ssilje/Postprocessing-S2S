@@ -57,6 +57,7 @@ do
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
    fi
 done
+ls
 HC=`expr ${HC} + 1`
 done
 
