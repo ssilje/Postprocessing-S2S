@@ -39,32 +39,30 @@ echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
 
 
 cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
-cdo splitday ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
+cdo splitsel,1 ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
 
 cd ${workdir}/tmp
 
-daynum=$(echo | ls -L | wc -l)
+#daynum=$(echo | ls -L | wc -l)
 
-echo $daynum
-n=1
-while [ ${n} -le ${daynum}  ] ; do 
+#echo $daynum
+n=0
+while [ ${n} -le 40  ] ; do 
 #echo $n
 nm=`expr ${n} - 1`
 #echo $nm
- 
-  
-   
-   if [ $n -le 9 ]; then
-     if [ $n -eq 1 ]; then
-     cp tmp_0${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc 
-     else
-     ncdiff tmp_0${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f0${n}.nc
-     fi
-   elif [ $n -eq 10  ]; then
-   ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
-   else 
-   ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
-   fi
+ if [ $n -eq 0 ]; then
+     #
+    echo "lead time 0" 
+    cp tmp_000000.nc TP_00.nc
+   else
+     ncdiff tmp_0*${n}.nc tmp_0*${nm}.nc TP_${n}.nc
+  fi
+ #  elif [ $n -eq 10  ]; then
+ #  ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
+  # else 
+  # ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
+  # fi
    
    
    
@@ -72,7 +70,7 @@ nm=`expr ${n} - 1`
 done
    rm tmp_*.nc 
    
-   cdo cat tp_cf_* ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_f01-${daysum}.nc
+   cdo cat TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
 
 HC=`expr ${HC} + 1`
 done
