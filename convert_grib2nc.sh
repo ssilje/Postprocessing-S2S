@@ -1,14 +1,14 @@
 #!/bin/bash
 
 DATA_S2S='/cluster/work/users/sso102/S2S/ECMWF/TOT_PR'
-workdir='/cluster/work/users/sso102/S2S/'
+workdir='/cluster/work/users/sso102/S2S/work.$$'
  
-if [ ! -d ${workdir}/work.$$ ]
+if [ ! -d ${workdir}/ ]
 then
-    mkdir ${workdir}/work.$$
+    mkdir ${workdir}
 else
-    rm -r ${workdir}/work.$$
-    mkdir ${workdir}/work.$$
+    rm -r ${workdir}
+    mkdir ${workdir}
 fi
 
 date='2019-07-08'
@@ -27,8 +27,8 @@ echo $day
 echo $date
 echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
 mkdir tmp
-cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/work.$$/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
-cdo splitday ${workdir}/work.$$/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/work.$$/tmp/tmp_
+cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
+cdo splitday ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
 
 cd ${workdir}/work.$$/tmp
 
