@@ -29,9 +29,11 @@ HC='1'
 #while [ ${HC} -le 20  ] ; do # 20 years hindcast
 while [ ${HC} -le 5  ] ; do # 20 years hindcast
 yHC=`expr ${y} - $HC`
-echo $yHC
-echo $day
-echo $date
+
+#echo $yHC
+#echo $day
+#echo $date
+
 echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
 
 
@@ -45,7 +47,16 @@ daynum=$(echo | ls -L | wc -l)
 
 echo $daynum
 
-HC=`expr ${HC} + 1`
-
-
+for n in ${daynum}
+do
+   if [ $n -eq 1 ]
+   then
+   tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc = tmp_${n}.nc
+   else 
+   nm=`expr ${n} - 1`
+   ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
+   fi
 done
+HC=`expr ${HC} + 1`
+done
+
