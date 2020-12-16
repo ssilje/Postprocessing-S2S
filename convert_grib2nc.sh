@@ -13,6 +13,7 @@ HC='0'
 while [ ${HC} -le 20  ] ; do # 20 years hindcast
 yHC=`expr ${y} - $HC`
 echo $yHC
-echo $d
+echo $day
+echo $date
 HC=`expr ${HC} + 1`
 done
