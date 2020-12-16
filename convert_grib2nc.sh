@@ -49,7 +49,7 @@ echo $daynum
 
 for n in ${daynum}
 do
-   if [ $n -eq 1 ]
+   if [ $n == 1 ]
    then
    tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc = tmp_${n}.nc
    else 
