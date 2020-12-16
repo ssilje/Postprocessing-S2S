@@ -46,9 +46,8 @@ cd ${workdir}/tmp
 daynum=$(echo | ls -L | wc -l)
 
 echo $daynum
-
-for n in ${daynum}
-do
+n=1
+while [ ${n} -le ${daynum}  ] ; do 
 echo $n
 nm=`expr ${n} - 1`
 echo $nm
