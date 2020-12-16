@@ -26,11 +26,11 @@ echo $yHC
 echo $day
 echo $date
 echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
-mkdir tmp
+mkdir ${workdir}/tmp
 cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
 cdo splitday ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
 
-cd ${workdir}/work.$$/tmp
+cd ${workdir}/tmp
 
 daynum=$(echo | ls -L | wc -l)
 
