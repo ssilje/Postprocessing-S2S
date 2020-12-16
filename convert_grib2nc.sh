@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATA_S2S='/cluster/work/users/sso102/S2S/ECMWF/TOT_PR'
-workdir='/cluster/work/users/sso102/S2S/work.$$'
+workdir=/cluster/work/users/sso102/S2S/work.$$
  
 if [ ! -d ${workdir}/ ]
 then
