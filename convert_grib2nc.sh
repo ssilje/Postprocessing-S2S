@@ -54,7 +54,7 @@ echo $nm
  
    if [ $n == 1 ]
    then
-  cp tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc tmp_${n}.nc
+   cp tmp_${n}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc 
    else 
   
    ncdiff tmp_${n}.nc tmp_${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
