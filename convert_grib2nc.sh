@@ -24,7 +24,7 @@ y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
 day=$(echo ${date} | cut -d'-' -f3)
 
-HC='0'
+HC='1'
         
 #while [ ${HC} -le 20  ] ; do # 20 years hindcast
 while [ ${HC} -le 5  ] ; do # 20 years hindcast
