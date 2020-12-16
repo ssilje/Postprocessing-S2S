@@ -11,6 +11,13 @@ else
     mkdir ${workdir}
 fi
 
+if [ ! -d ${workdir}/tmp ]
+then
+    mkdir ${workdir}/tmp
+else
+    rm -r ${workdir}/tmp
+    mkdir ${workdir}/tmp
+fi
 date='2019-07-08'
 
 y=$(echo ${date} | cut -d'-' -f1)
@@ -26,7 +33,9 @@ echo $yHC
 echo $day
 echo $date
 echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
-mkdir ${workdir}/tmp
+
+
+
 cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
 cdo splitday ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
 
