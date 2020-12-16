@@ -51,13 +51,21 @@ while [ ${n} -le 40  ] ; do
 #echo $n
 nm=`expr ${n} - 1`
 #echo $nm
- if [ $n -eq 0 ]; then
+if [ $n -lt 10 ]; then
+   if [ $n -eq 0 ]; then
      #
     echo "lead time 0" 
     cp tmp_000000.nc TP_00.nc
+  
+   elif [ $n -eq 10  ]; then
+     ncdiff tmp_0000${n}.nc tmp_00000*${nm}.nc TP_${n}.nc
    else
-     ncdiff tmp_0*${n}.nc tmp_0*${nm}.nc TP_${n}.nc
+   ncdiff tmp_00000${n}.nc tmp_00000*${nm}.nc TP_${n}.nc
   fi
+  else 
+   ncdiff tmp_0000${n}.nc tmp_0000*${nm}.nc TP_${n}.nc
+   fi
+   
  #  elif [ $n -eq 10  ]; then
  #  ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
   # else 
