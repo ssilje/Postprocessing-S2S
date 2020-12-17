@@ -20,8 +20,8 @@ day=$(echo ${date} | cut -d'-' -f3)
 
 HC='1'
         
-while [ ${HC} -le 20  ] ; do # 20 years hindcast
-#while [ ${HC} -le 5  ] ; do # 20 years hindcast
+#while [ ${HC} -le 20  ] ; do # 20 years hindcast
+while [ ${HC} -le 5  ] ; do # 20 years hindcast
   yHC=`expr ${y} - $HC`
   echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
   if [ ! -d ${workdir}/tmp ]
@@ -78,10 +78,10 @@ while [ ${HC} -le 20  ] ; do # 20 years hindcast
    n=`expr ${n} + 1`
  done
    cd ${workdir}/tmp
-   rm  ${workdir}/tmp/tmp_*.nc 
+   #rm  ${workdir}/tmp/tmp_*.nc 
    cdo cat  ${workdir}/tmp/TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
-   rm  -r ${workdir}/tmp
-   rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
+  # rm  -r ${workdir}/tmp
+  # rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
    HC=`expr ${HC} + 1`
 done
 
