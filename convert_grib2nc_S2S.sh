@@ -32,7 +32,7 @@ while [ ${HC} -le 20  ] ; do # 20 years hindcast
      mkdir ${workdir}/tmp
   fi
   
-  cdo remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
+  cdo -R remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
   cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
   
   
