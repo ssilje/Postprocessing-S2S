@@ -37,12 +37,12 @@ while [ ${HC} -le 20  ] ; do # 20 years hindcast
   
   
  
-  ncrename  -v var228,pr ${workdir}/tmp2.nc ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
-  ncatted -O -a units,pr,o,c,mm/day ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
   
+    
   cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb ${workdir}/tmp.nc 
   cdo divc,6 ${workdir}/tmp.nc ${workdir}/tmp2.nc # need to check if correct, but the TOT_PR is given as kms-2/6h
-  cdo splitsel,1 ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
+  ncatted -O -a units,pr,o,c,mm/day ${workdir}/tmp2.nc 
+  cdo splitsel,1 ${workdir}/tmp2.nc  ${workdir}/tmp/tmp_
   rm ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
 
 
