@@ -52,7 +52,7 @@ while [ ${HC} -le 5  ] ; do # 20 years hindcast
   if [ $n -le 10 ]; then
      if [ $n -eq 0 ]; then
        echo "lead time $n" 
-       cp tmp_000000.nc TP_00.nc
+       cp tmp_000000.nc TP_${n}.nc
   
      elif [ $n -eq 10  ]; then
        echo "lead time $n"
@@ -66,7 +66,7 @@ while [ ${HC} -le 5  ] ; do # 20 years hindcast
       echo "lead time $n"
       ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
    fi
-   
+   cdo showdate TP_${n}.nc
  #  elif [ $n -eq 10  ]; then
  #  ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
   # else 
@@ -79,6 +79,7 @@ while [ ${HC} -le 5  ] ; do # 20 years hindcast
  done
    cd ${workdir}/tmp
    #rm  ${workdir}/tmp/tmp_*.nc 
+   
    cdo cat  ${workdir}/tmp/TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
   # rm  -r ${workdir}/tmp
   # rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
