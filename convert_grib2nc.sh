@@ -31,10 +31,13 @@ while [ ${HC} -le 5  ] ; do # 20 years hindcast
      rm -r ${workdir}/tmp
      mkdir ${workdir}/tmp
   fi
-
-  cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
+  
+  cdo remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
+  cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
+  
+  cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
   cdo splitsel,1 ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
-
+  rm ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
 
 
 #daynum=$(echo | ls -L | wc -l)
@@ -78,6 +81,7 @@ while [ ${HC} -le 5  ] ; do # 20 years hindcast
    rm  ${workdir}/tmp/tmp_*.nc 
    cdo cat  ${workdir}/tmp/TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
    rm  -r ${workdir}/tmp
+   rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
    HC=`expr ${HC} + 1`
 done
 
