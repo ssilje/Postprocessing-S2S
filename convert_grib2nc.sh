@@ -51,20 +51,23 @@ while [ ${n} -le 40  ] ; do
 #echo $n
 nm=`expr ${n} - 1`
 #echo $nm
-if [ $n -lt 10 ]; then
+if [ $n -le 10 ]; then
    if [ $n -eq 0 ]; then
      #
-    echo "lead time 0" 
-    cp tmp_000000.nc TP_00.nc
+       echo "lead time $n" 
+       cp tmp_000000.nc TP_00.nc
   
    elif [ $n -eq 10  ]; then
-     ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
+       echo "lead time $n"
+       ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
    elif  [ $n -gt 0 && $n -lt 10 ]; then
-   ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
+       echo "lead time $n"
+       ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
   fi
   
   else 
-   ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
+      echo "lead time $n"
+      ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
    fi
    
  #  elif [ $n -eq 10  ]; then
