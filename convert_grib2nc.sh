@@ -20,8 +20,8 @@ day=$(echo ${date} | cut -d'-' -f3)
 
 HC='1'
         
-#while [ ${HC} -le 20  ] ; do # 20 years hindcast
-while [ ${HC} -le 5  ] ; do # 20 years hindcast
+while [ ${HC} -le 20  ] ; do # 20 years hindcast
+#while [ ${HC} -le 5  ] ; do # 20 years hindcast
   yHC=`expr ${y} - $HC`
   echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
   if [ ! -d ${workdir}/tmp ]
