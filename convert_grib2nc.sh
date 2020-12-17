@@ -60,7 +60,7 @@ if [ $n -le 10 ]; then
    elif [ $n -eq 10  ]; then
        echo "lead time $n"
        ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-   elif  [ $n -gt 0 && $n -lt 10 ]; then
+   elif  [ $n -gt 0 ] && [ $n -lt 10 ]; then
        echo "lead time $n"
        ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
   fi
