@@ -13,7 +13,7 @@ else
 fi
 
 
-date='2018-02'
+date='2018-07'
 
 y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
