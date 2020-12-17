@@ -11,13 +11,7 @@ else
     mkdir ${workdir}
 fi
 
-if [ ! -d ${workdir}/tmp ]
-then
-    mkdir ${workdir}/tmp
-else
-    rm -r ${workdir}/tmp
-    mkdir ${workdir}/tmp
-fi
+
 date='2019-07-08'
 
 y=$(echo ${date} | cut -d'-' -f1)
@@ -28,44 +22,44 @@ HC='1'
         
 #while [ ${HC} -le 20  ] ; do # 20 years hindcast
 while [ ${HC} -le 5  ] ; do # 20 years hindcast
-yHC=`expr ${y} - $HC`
+  yHC=`expr ${y} - $HC`
+  echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
+  if [ ! -d ${workdir}/tmp ]
+     then
+     mkdir ${workdir}/tmp
+  else
+     rm -r ${workdir}/tmp
+     mkdir ${workdir}/tmp
+  fi
 
-#echo $yHC
-#echo $day
-#echo $date
-
-echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
+  cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
+  cdo splitsel,1 ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
 
 
-
-cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
-cdo splitsel,1 ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc ${workdir}/tmp/tmp_
-
-cd ${workdir}/tmp
 
 #daynum=$(echo | ls -L | wc -l)
 
 #echo $daynum
-n=0
-while [ ${n} -le 40  ] ; do 
-#echo $n
-nm=`expr ${n} - 1`
-#echo $nm
-if [ $n -le 10 ]; then
-   if [ $n -eq 0 ]; then
-     #
+  n=0
+  while [ ${n} -le 40  ] ; do 
+  cd ${workdir}/tmp
+  #echo $n
+  nm=`expr ${n} - 1`
+  #echo $nm
+  if [ $n -le 10 ]; then
+     if [ $n -eq 0 ]; then
        echo "lead time $n" 
        cp tmp_000000.nc TP_00.nc
   
-   elif [ $n -eq 10  ]; then
+     elif [ $n -eq 10  ]; then
        echo "lead time $n"
        ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-   elif  [ $n -gt 0 ] && [ $n -lt 10 ]; then
+     elif  [ $n -gt 0 ] && [ $n -lt 10 ]; then
        echo "lead time $n"
        ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-  fi
+     fi
   
-  else 
+   else 
       echo "lead time $n"
       ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
    fi
@@ -79,11 +73,11 @@ if [ $n -le 10 ]; then
    
    
    n=`expr ${n} + 1`
-done
-   rm tmp_*.nc 
-   
-   cdo cat TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
-
-HC=`expr ${HC} + 1`
+ done
+   cd ${workdir}/tmp
+   rm  ${workdir}/tmp/tmp_*.nc 
+   cdo cat  ${workdir}/tmp/TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
+   rm  -r ${workdir}/tmp
+   HC=`expr ${HC} + 1`
 done
 
