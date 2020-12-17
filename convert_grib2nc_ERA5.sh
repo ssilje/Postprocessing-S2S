@@ -25,6 +25,6 @@ m=$(echo ${date} | cut -d'-' -f2)
   
   cdo -f nc copy  ${workdir}/ERA5_${y}${m}_r720x360_EUR.grb ${workdir}/ERA5_${y}${m}_r720x360_EUR_unit_m.nc 
   cdo mulc,1000 ${workdir}/ERA5_${y}${m}_r720x360_EUR_unit_m.nc ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc # convert to kg/m2
-  ncatted -O -a units,pr,o,c,mm/day ERA5_${y}${m}_r720x360_EUR.nc
+  ncatted -O -a units,pr,o,c,mm/day ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
   rm ${workdir}/ERA5_${y}${m}_r720x360.grb ${workdir}/ERA5_${y}${m}_r720x360_EUR.grb 
   
