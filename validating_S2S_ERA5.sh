@@ -16,6 +16,9 @@ workdir=/cluster/work/users/sso102/S2S/VALIDATION/work.$$
 #        2020-05-04 2020-05-07 2020-05-11 2020-05-14 2020-05-18 2020-05-21 2020-05-25 2020-05-28 
 #        2020-06-01 2020-06-04 2020-06-08 2020-06-11 2020-06-15 2020-06-18 2020-06-22 2020-06-25 2020-06-29'
 
+day30='01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 15 17 18 19 20 21 22 23 24 25 26 27 28 29 30'
+day31='01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 15 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31'
+
 DATEforecasts='2019-07-01' 
 date='2018-07'
 
@@ -36,10 +39,17 @@ echo ${fday}
 cdo splitday ${Data_ERA}/ERA5_${y}${m}_r720x360_EUR.nc ${workdir}/ERA_${y}-${m}-
 cd ${workdir}
 daynum=$(echo | ls -L | wc -l)
-cdo splitsel,1 ${Data_S2S}/tp_cf_${DATEforecasts}_hc_${y}-${m}-${fday}_daily.nc ${workdir}/S2S_${y}-${m}_${DATEforecasts}_leadtim
-
-
-#y=$(echo ${date} | cut -d'-' -f1)
+cdo splitsel,1 ${Data_S2S}/tp_cf_${DATEforecasts}_hc_${y}-${m}-${fday}_daily.nc ${workdir}/S2S_${y}-${m}_${DATEforecasts}_leadtime
 echo $daynum
-#ncdiff S2S_2018-07_2019-07-01_leadtim000013.nc ERA_2018-07-14.nc BIAS_2018-07-14.nc
 
+if [ ${daynum} -eq 30 ]; then
+for dd in ${day30}; do
+leadtime=0
+    if [ ${fday} -eq ${dd} ]; then
+
+    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime*${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+   leadtime=`expr ${leadtime} + 1`
+   fi
+   done
+   fi
+   
