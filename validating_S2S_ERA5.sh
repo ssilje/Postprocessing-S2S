@@ -51,5 +51,14 @@ leadtime=0
    leadtime=`expr ${leadtime} + 1`
    fi
    done
+   elif [${daynum} -eq 31 ]; then
+for dd in ${day31}; do
+leadtime=0
+    if [ ${fday} -eq ${dd} ]; then
+
+    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime*${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+   leadtime=`expr ${leadtime} + 1`
    fi
+   done
+fi
    
