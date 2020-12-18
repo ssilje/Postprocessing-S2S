@@ -34,7 +34,9 @@ fi
 if [ ! -d ${savedir}/ ]
 then
     mkdir ${savedir}
-
+else
+    rm -r ${savedir}
+    mkdir ${savedir}
 fi
 
 
