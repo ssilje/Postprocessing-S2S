@@ -3,6 +3,7 @@
 Data_ERA='/cluster/work/users/sso102/ERA5/work.5263'
 Data_S2S='/cluster/work/users/sso102/S2S/work.73783'
 workdir=/cluster/work/users/sso102/S2S/VALIDATION/work.$$
+savedir=/cluster/work/users/sso102/S2S/VALIDATION/BIAS
 #DATE='2019-07-01 2019-07-04 2019-07-08 2019-07-11 2019-07-15 2019-07-18 2019-07-22 2019-07-25 2019-07-29 
 #        2019-08-01 2019-08-05 2019-08-08 2019-08-12 2019-08-15 2019-08-19 2019-08-22 2019-08-26 2019-08-29 
 #        2019-09-02 2019-09-05 2019-09-09 2019-09-12 2019-09-16 2019-09-19 2019-09-23 2019-09-26 2019-09-30 
@@ -19,7 +20,7 @@ workdir=/cluster/work/users/sso102/S2S/VALIDATION/work.$$
 day30='01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 15 17 18 19 20 21 22 23 24 25 26 27 28 29 30'
 day31='01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 15 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31'
 
-DATEforecasts='2019-07-01' 
+Df='2019-07-01 2019-07-04' 
 date='2018-07'
 
 if [ ! -d ${workdir}/ ]
@@ -29,6 +30,15 @@ else
     rm -r ${workdir}
     mkdir ${workdir}
 fi
+
+if [ ! -d ${savedir}/ ]
+then
+    mkdir ${savedir}
+
+fi
+
+
+for DATEforecasts in ${Df}; do
 
 y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
@@ -74,3 +84,5 @@ elif [ ${daynum} -eq 31 ]; then
     done
 fi
 
+rm ERA_*.nc S2S_*.nc
+done
