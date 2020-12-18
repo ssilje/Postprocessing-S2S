@@ -41,6 +41,7 @@ while [ ${HC} -le 1  ] ; do # 20 years hindcast
   
     
   cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb ${workdir}/tmp.nc 
+  ncks -A -v lon,lat /cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE/LAT_LON_r720x360_EUR.nc ${workdir}/tmp.nc 
   cdo divc,6 ${workdir}/tmp.nc ${workdir}/tmp2.nc # need to check if correct, but the TOT_PR is given as kms-2/6h
   ncatted -O -a units,pr,o,c,mm/day ${workdir}/tmp2.nc 
   cdo splitsel,1 ${workdir}/tmp2.nc  ${workdir}/tmp/tmp_
