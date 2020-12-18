@@ -47,21 +47,19 @@ while [ ${HC} -le 1  ] ; do # 20 years hindcast
      mkdir ${workdir}/tmp
   fi
   
-  cdo remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
-  cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
+cdo remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
+cdo sellonlatbox,-30,60,30,75  ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
   
-  cdo -f nc copy  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb ${workdir}/tmp.nc 
-  ncks -A -v lon,lat /cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE/LAT_LON_r720x360_EUR.nc ${workdir}/tmp.nc 
-  cdo divc,6 ${workdir}/tmp.nc ${workdir}/tmp2.nc # need to check if correct, but the TOT_PR is given as kms-2/6h
-  ncrename  -v tp,pr ${workdir}/tmp2.nc ${workdir}/tmp3.nc
-  ncatted -O -a units,pr,o,c,mm/day ${workdir}/tmp3.nc 
+cdo -f nc copy  ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb ${workdir}/tmp.nc 
+ncks -A -v lon,lat /cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE/LAT_LON_r720x360_EUR.nc ${workdir}/tmp.nc 
+cdo divc,6 ${workdir}/tmp.nc ${workdir}/tmp2.nc # need to check if correct, but the TOT_PR is given as kms-2/6h
+ncrename  -v tp,pr ${workdir}/tmp2.nc ${workdir}/tmp3.nc
+ncatted -O -a units,pr,o,c,mm/day ${workdir}/tmp3.nc 
 cdo splitsel,1 ${workdir}/tmp3.nc  ${workdir}/tmp/tmp_
-rm ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb 
-rm ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb 
-rm ${DATA_S2S}/tmp*.nc ${workdir}/tmp*.nc 
-pwd ${DATA_S2S} 
-ls ${DATA_S2S}
-pwd ${workdir}
+rm ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb 
+rm ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb 
+rm ${workdir}/tmp.nc ${workdir}/tmp2.nc ${workdir}/tmp3.nc 
+ 
 ls ${workdir}
 
 #daynum=$(echo | ls -L | wc -l)
@@ -105,7 +103,7 @@ ls ${workdir}
    #rm  ${workdir}/tmp/tmp_*.nc 
    
    cdo mergetime  ${workdir}/tmp/TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
-  # rm  -r ${workdir}/tmp
+   rm  -r ${workdir}/tmp
   # rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
    HC=`expr ${HC} + 1`
 done
