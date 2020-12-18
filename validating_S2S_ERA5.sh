@@ -75,6 +75,7 @@ elif [ ${daynum} -eq 31 ]; then
 	if [ ${fday} -eq ${dd} ]; then
 	    for valdd in ${day31}; do
                 if [ ${leadtime} -lt 10 ]; then
+		echo "start here"
 		echo "year"
 		echo ${y}
 		echo "month"
@@ -85,9 +86,13 @@ elif [ ${daynum} -eq 31 ]; then
 		echo ${dd}
 		echo "leadtime"
 		echo ${leadtime}
+		echo S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc
+		echo ERA_${y}-${m}-${valdd}.nc
+		echo ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                     ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 else
-				echo "year"
+		echo "start here"
+		echo "year"
 		echo ${y}
 		echo "month"
 		echo ${m} 
@@ -97,6 +102,9 @@ elif [ ${daynum} -eq 31 ]; then
 		echo ${dd}
 		echo "leadtime"
 		echo ${leadtime}
+		echo S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc
+		echo ERA_${y}-${m}-${valdd}.nc
+		echo ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                     ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 fi
                 leadtime=`expr ${leadtime} + 1`
