@@ -12,10 +12,22 @@ else
     mkdir ${workdir}
 fi
 
-d='2018-07 2018-08'
+syear=1999
+eyear=2019
+month='01 02 03 04 05 06 07 08 09 10 11 12'
+YYYY=${syear}
+
+while [ ${YYYY} -le ${eyear} ]
+do
+
+for m in ${month}; do 
+
+date=$YYYY-$m
+
+#d='2018-07 2018-08'
 
 
-for date in $d; do
+#for date in $d; do
 
 
 y=$(echo ${date} | cut -d'-' -f1)
@@ -31,5 +43,5 @@ m=$(echo ${date} | cut -d'-' -f2)
   ncrename  -v var228,pr ${workdir}/tmp2.nc ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
   ncatted -O -a units,pr,o,c,mm/day ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
   rm ${workdir}/ERA5_${y}${m}_r720x360.grb ${workdir}/ERA5_${y}${m}_r720x360_EUR.grb ${workdir}/tmp2.nc ${workdir}/tmp.nc
-  
+  done
   done
