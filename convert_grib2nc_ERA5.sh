@@ -44,4 +44,5 @@ m=$(echo ${date} | cut -d'-' -f2)
   ncatted -O -a units,pr,o,c,mm/day ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
   rm ${workdir}/ERA5_${y}${m}_r720x360.grb ${workdir}/ERA5_${y}${m}_r720x360_EUR.grb ${workdir}/tmp2.nc ${workdir}/tmp.nc
   done
+  YYYY=`expr ${YYYY} + 1`
   done
