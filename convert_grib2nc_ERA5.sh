@@ -12,8 +12,11 @@ else
     mkdir ${workdir}
 fi
 
+d='2018-07 2018-08'
 
-date='2018-07'
+
+for date in d; do
+
 
 y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
@@ -29,3 +32,4 @@ m=$(echo ${date} | cut -d'-' -f2)
   ncatted -O -a units,pr,o,c,mm/day ${workdir}/ERA5_${y}${m}_r720x360_EUR.nc
   rm ${workdir}/ERA5_${y}${m}_r720x360.grb ${workdir}/ERA5_${y}${m}_r720x360_EUR.grb ${workdir}/tmp2.nc ${workdir}/tmp.nc
   
+  done
