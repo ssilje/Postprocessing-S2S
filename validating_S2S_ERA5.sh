@@ -71,7 +71,7 @@ if [ ${daynum} -eq 30 ]; then
     done
     fi
 dd=1
-while [ dd -le ${daynum} ]; then
+while [ dd -le ${daynum} ]; do
 leadtime=0
 valdd=${dd}
 	if [ ${fday} -eq ${dd} ]; then
