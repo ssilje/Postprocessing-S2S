@@ -15,7 +15,7 @@ fi
 d='2018-07 2018-08'
 
 
-for date in d; do
+for date in $d; do
 
 
 y=$(echo ${date} | cut -d'-' -f1)
