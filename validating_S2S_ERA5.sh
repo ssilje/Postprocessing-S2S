@@ -51,7 +51,7 @@ leadtime=0
    leadtime=`expr ${leadtime} + 1`
    fi
    done
-   elif [${daynum} -eq 31 ]; then
+   elif [ ${daynum} -eq 31 ]; then
 for dd in ${day31}; do
 leadtime=0
     if [ ${fday} -eq ${dd} ]; then
