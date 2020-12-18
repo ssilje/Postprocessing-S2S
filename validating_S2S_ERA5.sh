@@ -43,28 +43,34 @@ cdo splitsel,1 ${Data_S2S}/tp_cf_${DATEforecasts}_hc_${y}-${m}-${fday}_daily.nc 
 echo $daynum
 
 if [ ${daynum} -eq 30 ]; then
-for dd in ${day30}; do
-leadtime=0
-    if [ ${fday} -eq ${dd} ]; then
-       if [ ${leadtime} -lt 10 ]; then
-       ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
-       else 
-       ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
-       fi
-    leadtime=`expr ${leadtime} + 1`
-   fi
-   done
-   elif [ ${daynum} -eq 31 ]; then
-for dd in ${day31}; do
-leadtime=0
-    if [ ${fday} -eq ${dd} ]; then
-    if [ ${leadtime} -lt 10 ]; then
-    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
-    else 
-    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
-    fi
-   leadtime=`expr ${leadtime} + 1`
-   fi
-   done
+    for dd in ${day30}; do
+	leadtime=0
+	
+	if [ ${fday} -eq ${dd} ]; then
+            for valdd in ${day30}; do
+		if [ ${leadtime} -lt 10 ]; then
+		    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
+		else 
+		    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
+		fi
+		leadtime=`expr ${leadtime} + 1`
+	    done
+	fi
+    done
+elif [ ${daynum} -eq 31 ]; then
+    for dd in ${day31}; do
+	leadtime=0
+	if [ ${fday} -eq ${dd} ]; then
+	    for valdd in ${day31}; do
+                if [ ${leadtime} -lt 10 ]; then
+                    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
+                else
+                    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
+                fi
+                leadtime=`expr ${leadtime} + 1`
+	    done
+	fi
+	
+    done
 fi
-   
+
