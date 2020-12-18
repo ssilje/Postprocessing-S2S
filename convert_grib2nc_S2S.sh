@@ -34,7 +34,7 @@ while [ ${HC} -le 20  ] ; do # 20 years hindcast
   
   cdo -R remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
   cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
-  ncks -A -v lon,lat ${/cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE}/LAT_LON_r720x360_EUR.nc ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
+  ncks -A -v lon,lat /cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE/LAT_LON_r720x360_EUR.nc ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
   
   
  
