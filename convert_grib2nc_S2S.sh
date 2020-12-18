@@ -27,7 +27,7 @@ fi
 
 d='2019-07-01 2019-07-04 2019-07-08 2019-07-11 2019-07-15 2019-07-18 2019-07-22 2019-07-25 2019-07-29'
 
-for date in ${d}; do
+for date in ${d}; do # for (1)
 
 y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
@@ -35,7 +35,7 @@ day=$(echo ${date} | cut -d'-' -f3)
 
 HC='1'
         
-while [ ${HC} -le 1  ] ; do # 20 years hindcast
+while [ ${HC} -le 1  ] ; do # 20 years hindcast # while (2)
 
   yHC=`expr ${y} - $HC`
   echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
@@ -66,28 +66,28 @@ ls ${workdir}
 
 #echo $daynum
   n=0
-  while [ ${n} -le 40  ] ; do 
+  while [ ${n} -le 40  ] ; do # while (3)
   cd ${workdir}/tmp
   #echo $n
   nm=`expr ${n} - 1`
   #echo $nm
-  if [ $n -le 10 ]; then
-     if [ $n -eq 0 ]; then
+  if [ $n -le 10 ]; then # if (4)
+     if [ $n -eq 0 ]; then  # if (5) start
        echo "lead time $n" 
        cp tmp_000000.nc TP_${n}.nc
   
-     elif [ $n -eq 10  ]; then
+     elif [ $n -eq 10  ]; then 
        echo "lead time $n"
        ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
      elif  [ $n -gt 0 ] && [ $n -lt 10 ]; then
        echo "lead time $n"
        ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-     fi
+     fi  # if (5) done
   
    else 
       echo "lead time $n"
       ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
-   fi
+   fi  # if (4) done
    cdo showdate TP_${n}.nc
  #  elif [ $n -eq 10  ]; then
  #  ncdiff tmp_${n}.nc tmp_0${nm}.nc tp_cf_${date}_hc_${yHC}-${m}-${day}_f${n}.nc
@@ -98,7 +98,7 @@ ls ${workdir}
    
    
    n=`expr ${n} + 1`
- done
+ done  # while (3) done
    cd ${workdir}/tmp
    #rm  ${workdir}/tmp/tmp_*.nc 
    
@@ -106,7 +106,8 @@ ls ${workdir}
    rm  -r ${workdir}/tmp
   # rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
    HC=`expr ${HC} + 1`
-done
-done
+done  # while (2) done
  rm  -r ${workdir}/tmp
-done
+done # for (1)
+
+#done 
