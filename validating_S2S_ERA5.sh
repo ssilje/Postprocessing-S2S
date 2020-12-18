@@ -46,13 +46,13 @@ y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
 
 fday=$(echo ${DATEforecasts} | cut -d'-' -f3)
-echo ${fday}
+#echo ${fday}
 
 cdo splitday ${Data_ERA}/ERA5_${y}${m}_r720x360_EUR.nc ${workdir}/ERA_${y}-${m}-
 cd ${workdir}
 daynum=$(echo | ls -L | wc -l)
 cdo splitsel,1 ${Data_S2S}/tp_cf_${DATEforecasts}_hc_${y}-${m}-${fday}_daily.nc ${workdir}/S2S_${y}-${m}_${DATEforecasts}_leadtime
-echo $daynum
+#echo $daynum
 
 if [ ${daynum} -eq 30 ]; then
     for dd in ${day30}; do
@@ -83,7 +83,7 @@ elif [ ${daynum} -eq 31 ]; then
 		leadtime=`expr 0${leadtime}`
 		fi
              
-	     
+	     echo ${valdd}
                  ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 leadtime=`expr ${leadtime} + 1`
 		valdd=`expr ${valdd} + 1`
