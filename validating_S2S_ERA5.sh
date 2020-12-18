@@ -69,16 +69,17 @@ if [ ${daynum} -eq 30 ]; then
 	    done
 	fi
     done
-elif [ ${daynum} -eq 31 ]; then
-    for dd in ${day31}; do
-	leadtime=0
-	valdd=${dd}
+    fi
+dd=1
+while [ dd -le ${daynum} ]; then
+leadtime=0
+valdd=${dd}
 	if [ ${fday} -eq ${dd} ]; then
 		while [ ${valdd} -le 31 ]; do
 		echo ${valdd}
-		#if [ ${valdd} -lt 10 ]; then
-		#valdd=`expr 0${valdd}`
-		#fi
+		if [ ${valdd} -lt 10 ]; then
+		valdd=`expr 0${valdd}`
+		fi
 		if [ ${leadtime} -lt 10  ]; then
 		leadtime=`expr 0${leadtime}`
 		fi
@@ -89,9 +90,9 @@ elif [ ${daynum} -eq 31 ]; then
 		valdd=`expr ${valdd} + 1`
 	    done
 	fi
-	
-    done
-fi
+	dd=`expr ${dd} + 1`
+ done
+
 
 rm ERA_*.nc S2S_*.nc
 done
