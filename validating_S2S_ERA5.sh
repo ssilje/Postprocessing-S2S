@@ -34,7 +34,8 @@ fday=$(echo ${DATEforecasts} | cut -d'-' -f3)
 echo ${fday}
 
 cdo splitday ${Data_ERA}/ERA5_${y}${m}_r720x360_EUR.nc ${workdir}/ERA_${y}-${m}-
-daynum=$(echo ${workdir} | ls -L | wc -l)
+cd ${workdir}
+daynum=$(echo | ls -L | wc -l)
 cdo splitsel,1 ${Data_S2S}/tp_cf_${DATEforecasts}_hc_${y}-${m}-${fday}_daily.nc ${workdir}/S2S_${y}-${m}_${DATEforecasts}_leadtim
 
 
