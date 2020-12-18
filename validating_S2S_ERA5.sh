@@ -46,17 +46,23 @@ if [ ${daynum} -eq 30 ]; then
 for dd in ${day30}; do
 leadtime=0
     if [ ${fday} -eq ${dd} ]; then
-
-    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime*${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
-   leadtime=`expr ${leadtime} + 1`
+       if [ ${leadtime} -lt 10 ]; then
+       ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+       else 
+       ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+       fi
+    leadtime=`expr ${leadtime} + 1`
    fi
    done
    elif [ ${daynum} -eq 31 ]; then
 for dd in ${day31}; do
 leadtime=0
     if [ ${fday} -eq ${dd} ]; then
-
-    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime*${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+    if [ ${leadtime} -lt 10 ]; then
+    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+    else 
+    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${dd}.nc BIAS_S2S-ERA_${y}-${m}_${DATEforecasts}_leadtime${leadtime}.nc
+    fi
    leadtime=`expr ${leadtime} + 1`
    fi
    done
