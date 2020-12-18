@@ -36,7 +36,7 @@ echo ${fday}
 cdo splitday ${Data_ERA}/ERA5_${y}${m}_r720x360_EUR.nc ${workdir}/ERA_${y}-${m}-
 cdo splitsel,1 ${Data_S2S}/tp_cf_${DATEforecasts}_hc_${y}-${m}-${fday}_daily.nc ${workdir}/S2S_${y}-${m}_${DATEforecasts}_leadtim
 
-daynum=$(echo ERA_* | ls -L | wc -l)
+daynum=$(echo ${workdir}/ERA_* | ls -L | wc -l)
 #y=$(echo ${date} | cut -d'-' -f1)
 echo $daynum
 #ncdiff S2S_2018-07_2019-07-01_leadtim000013.nc ERA_2018-07-14.nc BIAS_2018-07-14.nc
