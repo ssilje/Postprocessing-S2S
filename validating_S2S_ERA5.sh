@@ -80,7 +80,7 @@ elif [ ${daynum} -eq 31 ]; then
 		valdd=`expr 0${valdd}`
 		fi
 		if [ ${leadtime} -lt 10  ]; then
-		leadtime`expr 0${leadtime}`
+		leadtime=`expr 0${leadtime}`
 		fi
              
 	     
