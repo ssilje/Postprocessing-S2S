@@ -77,18 +77,14 @@ elif [ ${daynum} -eq 31 ]; then
 		while [ ${valdd} -le 31 ]; do
 		echo ${valdd}
 		if [ ${valdd} -lt 10 ]; then
-		valdd=0${valdd}
-		echo $valdd
-		vd=`expr 0${valdd}`
-		echo $vc
+		valdd=`expr 0${valdd}`
 		fi
-                if [ ${leadtime} -lt 10 ]; then
-		
-                    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
-                else
-		
-                    ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
-                fi
+		if [ ${leadtime} -lt 10  ]; then
+		leadtime`expr 0${leadtime}`
+		fi
+             
+	     
+                 ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 leadtime=`expr ${leadtime} + 1`
 		valdd=`expr ${valdd} + 1`
 	    done
