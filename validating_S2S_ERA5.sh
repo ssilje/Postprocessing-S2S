@@ -84,6 +84,7 @@ elif [ ${daynum} -eq 31 ]; then
                     ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 fi
                 leadtime=`expr ${leadtime} + 1`
+		valdd=`expr ${valdd} + 1`
 	    done
 	fi
 	
