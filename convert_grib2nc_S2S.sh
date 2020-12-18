@@ -108,4 +108,5 @@ ls ${workdir}
    HC=`expr ${HC} + 1`
 done
 done
+ rm  -r ${workdir}/tmp
 done
