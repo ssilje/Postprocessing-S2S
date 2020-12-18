@@ -76,9 +76,9 @@ elif [ ${daynum} -eq 31 ]; then
 	if [ ${fday} -eq ${dd} ]; then
 		while [ ${valdd} -le 31 ]; do
 		echo ${valdd}
-		if [ ${valdd} -lt 10 ]; then
-		valdd=`expr 0${valdd}`
-		fi
+		#if [ ${valdd} -lt 10 ]; then
+		#valdd=`expr 0${valdd}`
+		#fi
 		if [ ${leadtime} -lt 10  ]; then
 		leadtime=`expr 0${leadtime}`
 		fi
