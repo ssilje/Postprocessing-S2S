@@ -78,6 +78,9 @@ elif [ ${daynum} -eq 31 ]; then
 		echo ${valdd}
 		if [ ${valdd} -lt 10 ]; then
 		valdd=0${valdd}
+		echo $valdd
+		vd=`expr 0${valdd}`
+		echo $vc
 		fi
                 if [ ${leadtime} -lt 10 ]; then
 		
