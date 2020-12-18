@@ -30,7 +30,7 @@ fi
 y=$(echo ${date} | cut -d'-' -f1)
 m=$(echo ${date} | cut -d'-' -f2)
 
-fday=$(echo ${Dateforecasts} | cut -d'-' -f3)
+fday=$(echo ${DATEforecasts} | cut -d'-' -f3)
 echo ${fday}
 
 cdo splitday ${Data_ERA}/ERA5_${y}${m}_r720x360_EUR.nc ${workdir}/ERA_${y}-${m}-
