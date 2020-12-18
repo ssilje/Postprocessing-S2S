@@ -1,0 +1,16 @@
+name: ECMWF_PLOTTING
+channels:
+  - conda-forge
+  - anaconda
+  - defaults
+dependencies: 
+  - matplotlib
+  - numpy
+  - xarray
+  - basemap
+  - netcdf4
+  - python
+  - ipython
+  - cartopy
+  - spyder
+  - ecmwf-api-client
