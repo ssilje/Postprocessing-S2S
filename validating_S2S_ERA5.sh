@@ -75,6 +75,7 @@ elif [ ${daynum} -eq 31 ]; then
 	valdd=${dd}
 	if [ ${fday} -eq ${dd} ]; then
 		while [ ${valdd} -le 31 ]; do
+		echo ${valdd}
                 if [ ${leadtime} -lt 10 ]; then
 		
                     ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
