@@ -75,8 +75,28 @@ elif [ ${daynum} -eq 31 ]; then
 	if [ ${fday} -eq ${dd} ]; then
 	    for valdd in ${day31}; do
                 if [ ${leadtime} -lt 10 ]; then
+		echo "year"
+		echo ${y}
+		echo "month"
+		echo ${m} 
+		echo "valday"
+		echo ${valdd}
+		echo ${day}
+		echo ${dd}
+		echo "leadtime"
+		echo ${leadtime}
                     ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime00000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 else
+				echo "year"
+		echo ${y}
+		echo "month"
+		echo ${m} 
+		echo "valday"
+		echo ${valdd}
+		echo ${day}
+		echo ${dd}
+		echo "leadtime"
+		echo ${leadtime}
                     ncdiff S2S_${y}-${m}_${DATEforecasts}_leadtime0000${leadtime}.nc ERA_${y}-${m}-${valdd}.nc ${savedir}/BIAS_S2S-ERA_${y}-${m}-${valdd}_${DATEforecasts}_leadtime${leadtime}.nc
                 fi
                 leadtime=`expr ${leadtime} + 1`
