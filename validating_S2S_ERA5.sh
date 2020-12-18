@@ -43,7 +43,7 @@ for DATEforecasts in ${Df}; do
 #date='2018-07'
 
 yy=$(echo ${DATEforecasts} | cut -d'-' -f1)
-y=`expr ${yy} - HC`
+y=`expr ${yy} - ${HC}`
 m=$(echo ${DATEforecasts} | cut -d'-' -f2)
 
 
