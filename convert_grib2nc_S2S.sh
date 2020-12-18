@@ -37,7 +37,7 @@ for date in ${d}; do # for (1)
 
     HC='1'
         
-    while [ ${HC} -le 1  ] ; do # 20 years hindcast # while (2)
+    while [ ${HC} -le 20  ] ; do # 20 years hindcast # while (2)
 
 	yHC=`expr ${y} - $HC`
 	if [ -f ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ]; then 
