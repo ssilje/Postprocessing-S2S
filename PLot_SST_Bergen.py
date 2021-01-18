@@ -18,12 +18,11 @@ from mpl_toolkits.basemap import Basemap,shiftgrid
 
 ERAfile='ERA5_sst_1999-2019_07_Bergen_clim.nc'
 f = Dataset(ERAfile, mode='r')
-ERA_SST = f.variables['SST'][:]
-ERA_time = f.variables['time'][:]
+ERA_SST = f.variables['SST']
+ERA_time = f.variables['time']
 
 #time_var = nc.variables['time']
 dtime = netCDF4.num2date(ERA_time[:],ERA_time.units)
-
 first = netCDF4.num2date(ERA_time[0],ERA_time.units)
 last = netCDF4.num2date(ERA_time[-1],ERA_time.units)
 print first.strftime('%Y-%b-%d %H:%M')
