@@ -16,7 +16,7 @@ import cartopy.feature as cfeature
 import matplotlib.font_manager
 from mpl_toolkits.basemap import Basemap,shiftgrid
 
-ERA5file='ERA5_sst_1999-2019_07_Bergen_clim.nc'
+ERAfile='ERA5_sst_1999-2019_07_Bergen_clim.nc'
 f = Dataset(ERAfile, mode='r')
 ERA_SST = f.variables['SST'][:]
 ERA_time = f.variables['time'][:]
