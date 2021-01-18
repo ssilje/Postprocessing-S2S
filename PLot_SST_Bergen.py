@@ -25,8 +25,8 @@ ERA_time = f.variables['time']
 dtime = netCDF4.num2date(ERA_time[:],ERA_time.units)
 first = netCDF4.num2date(ERA_time[0],ERA_time.units)
 last = netCDF4.num2date(ERA_time[-1],ERA_time.units)
-print first.strftime('%Y-%b-%d %H:%M')
-print last.strftime('%Y-%b-%d %H:%M')
+print(first.strftime('%Y-%b-%d %H:%M'))
+print(last.strftime('%Y-%b-%d %H:%M'))
 
 
 print(ERA_SST.shape)
