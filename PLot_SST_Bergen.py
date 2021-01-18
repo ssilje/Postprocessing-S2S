@@ -7,7 +7,8 @@ Created on Mon Jan 18 18:43:49 2021
 """
 import numpy as np
 import xarray as xr
-from netCDF4 import Dataset
+import netCDF4
+#from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib as mpl
