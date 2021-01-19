@@ -45,10 +45,10 @@ print(sst_new)
 #print(sst2)
 print(time)
 print(len(sst_new))
-print(len(sst_new[0])
+print(len(sst_new[0]))
 
 print(len(time))
-print(len(time[0])
+print(len(time[0]))
       
 test=np.concatenate((sst2,time), axis=1)  
 
