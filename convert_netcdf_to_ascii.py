@@ -36,7 +36,7 @@ for x in range(len(sst)):
         t=time2[x]
         column_test += sst_new,t
        ## print(sst_new,y)
-        
+test=np.concatenate((sst_new,time), axis=0)        
 #print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
