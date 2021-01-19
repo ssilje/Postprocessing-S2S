@@ -20,6 +20,15 @@ print(time.shape)
 print(sst.shape)
 time2= np.squeeze(time)
 print(time2)
+
+#sst2 = sst.strip( ) 
+print(sst)
+#print(sst2)
+
+for x in sst
+    for y in time
+    column_test=x,y
+print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
 #print(d[:,21,68])
@@ -29,9 +38,7 @@ with open ('output.txt','w') as fout:
     writer = csv.writer(fout)
     writer.writerow(sst)  
     writer.writerow(time2)  
-#sst2 = sst.strip( ) 
-print(sst)
-#print(sst2)
+
                   
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
