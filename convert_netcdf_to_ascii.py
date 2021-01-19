@@ -33,5 +33,5 @@ with open ('output.txt','w') as fout:
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
-    columns = sst,time
+    columns = sst,time2
     writer.writerow(columns)
