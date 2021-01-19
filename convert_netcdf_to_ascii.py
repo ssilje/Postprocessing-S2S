@@ -25,8 +25,8 @@ print(time2)
 print(sst)
 #print(sst2)
 column_test = []
-for x in sst:
-        sst_new = str(x)[1:-1]
+for x in range(len(sst)):
+        sst_new = str(sst(x))[1:-1]
         sst_new=str(sst_new)[1:-1]
         #print(sst_new)
         #column_test=x,y
