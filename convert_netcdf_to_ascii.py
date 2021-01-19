@@ -24,7 +24,7 @@ print(time2)
 #sst2 = sst.strip( ) 
 print(sst)
 #print(sst2)
-
+column_test = []
 for x in sst:
     for y in time:
         sst_new = str(x)[1:-1]
