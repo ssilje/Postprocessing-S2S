@@ -15,7 +15,7 @@ time = f.variables['time'][:]
 
 
 #print(d[:,21,68])
-print(d.shape)
+print(f.shape)
 print(lon.shape)
 
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
