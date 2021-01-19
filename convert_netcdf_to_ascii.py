@@ -29,12 +29,12 @@ for x in sst:
     for y in time:
         sst_new = str(x)[1:-1]
         sst_new=str(sst_new)[1:-1]
-        print(sst_new)
+        #print(sst_new)
         column_test=x,y
         column_test=sst_new,y
-        print(sst_new,y)
+       # print(sst_new,y)
         
-#print(column_test.shape)   
+print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
 #print(d[:,21,68])
