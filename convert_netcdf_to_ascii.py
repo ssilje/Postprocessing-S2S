@@ -29,7 +29,10 @@ with open ('output.txt','w') as fout:
     writer = csv.writer(fout)
     writer.writerow(sst)  
     writer.writerow(time2)  
-
+sst2 = sst.strip([) 
+print(sst)
+print(sst2)
+                  
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
