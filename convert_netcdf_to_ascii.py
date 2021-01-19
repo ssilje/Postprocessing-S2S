@@ -31,7 +31,8 @@ for x in sst:
         sst_new=str(sst_new)[1:-1]
         print(sst_new)
         column_test=x,y
-        #print(x,y)
+        column_test=sst_new,y
+        print(sst_new,y)
         
 #print(column_test.shape)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
