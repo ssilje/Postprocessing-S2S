@@ -18,7 +18,7 @@ time = f.variables['time'][:]
 #print(f.shape)
 print(time.shape)
 print(sst.shape)
-time2= np.squeeze(time).shape
+time2= np.squeeze(time)
 print(time2)
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
