@@ -28,9 +28,9 @@ with open ('output.txt','w') as fout:
     writer = csv.writer(fout)
     writer.writerows(sst)  
     writer.writerows(sst)  
-    
+
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
-    columns = [sst,time]
+    columns = sst,np.squeeze(time).shape
     writer.writerow(columns)
