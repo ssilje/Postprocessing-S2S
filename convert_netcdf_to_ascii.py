@@ -16,15 +16,15 @@ time = f.variables['time'][:]
 
 #print(d[:,21,68])
 #print(f.shape)
-print(time.shape)
-print(sst.shape)
+#print(time.shape)
+#print(sst.shape)
 time2= np.squeeze(time)
-print(time2)
+#print(time2)
 
 #sst2 = sst.strip( ) 
-print(sst)
+#print(sst)
 #print(sst2)
-print(range(len(sst)))
+#print(range(len(sst)))
 column_test = []
 sst2 = []
 for x in range(len(sst)):
@@ -38,10 +38,10 @@ for x in range(len(sst)):
         t=time2[x]
         column_test += sst_new,t
        ## print(sst_new,y)
-#print(sst2.shape)
-#print(time.shape)
+print(sst2)
+print(time)
 
-test=np.concatenate((sst2,time), axis=0)  
+test=np.concatenate((sst2,time), axis=1)  
 
 print(test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
