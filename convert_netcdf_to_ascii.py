@@ -33,4 +33,4 @@ with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
     columns = [sst,time]
-        writer.writerow(columns)
+    writer.writerow(columns)
