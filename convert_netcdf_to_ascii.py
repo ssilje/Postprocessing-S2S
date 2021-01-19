@@ -28,6 +28,8 @@ print(sst)
 for x in sst:
     for y in time:
         column_test=x,y
+        print(x,y)
+        
 print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
