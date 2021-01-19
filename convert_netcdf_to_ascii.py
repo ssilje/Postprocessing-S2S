@@ -34,7 +34,7 @@ for x in sst:
         sst_new = str(x)[1:-1]
         sst_new=str(sst_new)[1:-1]
         sst2 +=  sst_new
-        #print(sst_new)
+        print(sst_new)
       
         #t=time2[x]
         #column_test += sst_new,t
