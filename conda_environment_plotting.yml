@@ -15,4 +15,4 @@ dependencies:
   - spyder
   - ecmwf-api-client
   - properscoring
-  - scipy.stats
+  - scipy
