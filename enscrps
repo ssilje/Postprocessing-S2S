@@ -1,0 +1,52 @@
+def enscrps(
+        reference: xr.DataArray,
+        ensemble: xr.DataArray,
+        extent: T.Tuple[float, float, float, float] = None,
+        output_file_root: str = '{name}-{uuid}',
+        remove_atexit: bool = True
+) -> xr.DataArray:
+    """Computes Continuous Rank Probability Score of an xarray DataArray using ``enscrps``
+    CDO command.
+
+    :param reference: xr.DataArray
+        Xarray DataArray used as reference for crps calculus.
+    :param ensemble: xr.DataArray
+        Xarray DataArray with ensembles whose crps is to be calculated.
+    :param extent: tuple
+        (lon_min, lon_max, lat_min, lat_max), tuple of float for setting data array extent.
+    :param output_file_root: str
+        String for output root path. Each ensemble produces a different output file.
+    :param remove_atexit: bool
+        bool to decide whether keeping the output as netcdf file on disk
+    :return: xr.DataArray
+        Returns xarray DataArray **output_path_root**.crps.nc.
+
+    Example:
+
+    >>> ref = xr.DataArray(
+    ...     [[1., 3.],[2., 2.]],
+    ...     dims = ['lon', 'lat'],
+    ...     coords={
+    ...             'lon': [0., 20.],
+    ...             'lat': [0., 20.]
+    ...     },
+    ...     name='data'
+    ... )
+    >>> data = xr.concat([ref / 2, ref * 2], dim='realization')
+    >>> data['realization'] = (('realization'), data['realization'].to_index())
+    >>> enscrps(ref, data).values
+    array([[0.75]])
+    """
+    if reference.name != ensemble.name:
+        ensemble = ensemble.rename(reference.name)
+    ifiles = [io.dataarray_to_netcdf(reference, remove_atexit=True)]
+    ifiles += io.split_dataarray_to_netcdfs(ensemble, remove_atexit=True)
+    output_path_root = io.make_temporary_path(
+        output_file_root, name=ensemble.name, remove_atexit=remove_atexit, is_nameroot=True)
+    cmd = cdodriver.operator_to_ofile('enscrps', ifiles, output_path_root, extent=extent)
+    cdodriver.call_cdo(cmd)
+    crps = io.open_dataarray(output_path_root + '.crps.nc', ensemble.name)
+    crps.attrs['long_name'] = 'continuous ranked probability score'
+    if 'units' in reference.attrs:
+        crps.attrs['units'] = reference.attrs['units']
+    return crps
