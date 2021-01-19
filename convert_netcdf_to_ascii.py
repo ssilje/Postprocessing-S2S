@@ -30,8 +30,8 @@ for x in sst:
         sst_new = str(x)[1:-1]
         sst_new=str(sst_new)[1:-1]
         #print(sst_new)
-        column_test=x,y
-        column_test=sst_new,y
+        #column_test=x,y
+        column_test += sst_new,y
        # print(sst_new,y)
         
 print(column_test)   
