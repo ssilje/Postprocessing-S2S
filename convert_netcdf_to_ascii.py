@@ -16,7 +16,8 @@ time = f.variables['time'][:]
 
 #print(d[:,21,68])
 #print(f.shape)
-print(lon.shape)
+print(time.shape)
+print(sst.shape)
 
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
@@ -27,3 +28,9 @@ with open ('output.txt','w') as fout:
     writer = csv.writer(fout)
     writer.writerows(sst)  
     writer.writerows(sst)  
+    
+with open('example1.csv', 'w') as result:
+    writer = csv.writer(result, delimiter=",")
+    writer.writerow(('SST', 'time'))
+    columns = [sst,time]
+        writer.writerow(columns)
