@@ -27,8 +27,8 @@ print(sst)
 print(range(len(sst)))
 column_test = []
 for x in range(len(sst)):
-        print(x)
-        print(sst[x])
+      #  print(x)
+      #  print(sst[x])
         sst_new = str(sst[x])[1:-1]
         sst_new=str(sst_new)[1:-1]
         print(sst_new)
@@ -37,7 +37,7 @@ for x in range(len(sst)):
         column_test += sst_new,t
        ## print(sst_new,y)
         
-print(column_test)   
+#print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
 #print(d[:,21,68])
