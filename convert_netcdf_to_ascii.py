@@ -1,12 +1,22 @@
 import numpy as np
-import xray as xr
+import xarray as xr
+from netCDF4 import Dataset
+from matplotlib import pylab
 from pylab import *
 import csv
 
-data = xr.open_dataset("/nird/projects/NS9001K/sso102/S2S/DATA/S2S_SST/sst_CY46R1_2019-07-01_pf_forecast_BERGEN.nc")
-d = xr.DataArray(data.variables['sst'])
+nc_file = ("/nird/projects/NS9001K/sso102/S2S/DATA/S2S_SST/sst_CY46R1_2019-07-01_pf_forecast_BERGEN.nc")
+#d = xr.DataArray(data.variables['sst'])
+f = Dataset(nc_file, mode='r')
+lon = f.variables['lon'][:]
+lat = f.variables['lat'][:]
+sst = f.variables['sst'][:]
+time = f.variables['time'][:]
+
+
 #print(d[:,21,68])
 print(d.shape)
+print(lon.shape)
 
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
