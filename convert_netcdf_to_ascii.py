@@ -5,7 +5,7 @@ from matplotlib import pylab
 from pylab import *
 import csv
 
-nc_file = ("/nird/projects/NS9001K/sso102/S2S/DATA/S2S_SST/sst_CY46R1_2019-07-01_cf_hindcast_EUR.nc")
+nc_file = ("/nird/projects/NS9001K/sso102/S2S/DATA/S2S_SST/sst_CY46R1_2019-07-01_cf_forecast_BERGEN.nc")
 #d = xr.DataArray(data.variables['sst'])
 f = Dataset(nc_file, mode='r')
 lon = f.variables['lon'][:]
