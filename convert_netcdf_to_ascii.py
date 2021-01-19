@@ -25,8 +25,8 @@ print(time2)
 print(sst)
 #print(sst2)
 
-for x in sst
-    for y in time
+for x in sst:
+    for y in time:
     column_test=x,y
 print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
