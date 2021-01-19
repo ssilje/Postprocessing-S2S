@@ -33,7 +33,7 @@ for x in sst:
         column_test=x,y
         #print(x,y)
         
-print(column_test.shape)   
+#print(column_test.shape)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
 #print(d[:,21,68])
