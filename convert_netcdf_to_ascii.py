@@ -27,16 +27,17 @@ time2= np.squeeze(time)
 #print(range(len(sst)))
 column_test = []
 sst2 = []
-for x in range(len(sst)):
-      #  print(x)
-      #  print(sst[x])
-        sst_new = str(sst[x])[1:-1]
+#for x in range(len(sst)):
+for x in sst
+
+        #sst_new = str(sst[x])[1:-1]
+        sst_new = str(x)[1:-1]
         sst_new=str(sst_new)[1:-1]
         sst2 +=  sst_new
         #print(sst_new)
       
-        t=time2[x]
-        column_test += sst_new,t
+        #t=time2[x]
+        #column_test += sst_new,t
        ## print(sst_new,y)
 print(sst2)
 print(time)
