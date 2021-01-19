@@ -26,6 +26,7 @@ print(sst)
 #print(sst2)
 print(range(len(sst)))
 column_test = []
+sst2 = []
 for x in range(len(sst)):
       #  print(x)
       #  print(sst[x])
