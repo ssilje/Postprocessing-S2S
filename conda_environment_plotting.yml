@@ -16,3 +16,4 @@ dependencies:
   - ecmwf-api-client
   - properscoring
   - scipy
+  - xray
