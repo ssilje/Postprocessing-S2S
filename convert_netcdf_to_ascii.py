@@ -39,6 +39,9 @@ for x in sst:
         #t=time2[x]
         #column_test += sst_new,t
        ## print(sst_new,y)
+sst_new = str(sst)[1:-1]
+sst_new=str(sst_new)[1:-1]
+print(sst_new)
 print(sst2)
 print(time)
 
