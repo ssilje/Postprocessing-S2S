@@ -31,15 +31,16 @@ for x in range(len(sst)):
       #  print(sst[x])
         sst_new = str(sst[x])[1:-1]
         sst_new=str(sst_new)[1:-1]
-        print(sst_new)
-        ##column_test=x,y
+        sst2 +=  sst_new
+        #print(sst_new)
+      
         t=time2[x]
         column_test += sst_new,t
        ## print(sst_new,y)
-print(sst_new.shape)
+print(sst2.shape)
 print(time.shape)
 
-test=np.concatenate((sst_new,time), axis=0)        
+test=np.concatenate((sst2,time), axis=0)        
 #print(column_test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
