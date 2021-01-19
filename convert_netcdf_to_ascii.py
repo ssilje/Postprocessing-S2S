@@ -31,7 +31,7 @@ for x in range(len(sst)):
         print(sst[x])
         sst_new = str(sst[x])[1:-1]
         sst_new=str(sst_new)[1:-1]
-        ##print(sst_new)
+        print(sst_new)
         ##column_test=x,y
         t=time2[x]
         column_test += sst_new,t
