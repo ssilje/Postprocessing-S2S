@@ -50,4 +50,4 @@ with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
     columns = sst,time2
-    writer.writerow(columns)
+    writer.writerow(column_test)
