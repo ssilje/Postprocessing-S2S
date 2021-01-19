@@ -28,7 +28,7 @@ time2= np.squeeze(time)
 column_test = []
 sst2 = []
 #for x in range(len(sst)):
-for x in sst
+for x in sst:
 
         #sst_new = str(sst[x])[1:-1]
         sst_new = str(x)[1:-1]
