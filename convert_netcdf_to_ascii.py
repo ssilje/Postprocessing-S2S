@@ -24,6 +24,7 @@ print(time2)
 #sst2 = sst.strip( ) 
 print(sst)
 #print(sst2)
+print(range(len(sst)))
 column_test = []
 for x in range(len(sst)):
         print(x)
