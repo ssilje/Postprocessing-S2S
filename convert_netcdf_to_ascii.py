@@ -38,8 +38,8 @@ for x in range(len(sst)):
         t=time2[x]
         column_test += sst_new,t
        ## print(sst_new,y)
-print(sst2.shape)
-print(time.shape)
+#print(sst2.shape)
+#print(time.shape)
 
 test=np.concatenate((sst2,time), axis=0)        
 #print(column_test)   
