@@ -23,6 +23,6 @@ print(lon.shape)
 #print(d[:,21,68])
 
 #df = d[:,21,68]
-#with open ('/home/python/output.txt','w') as fout:
-#    writer = csv.writer(fout)
-#    writer.writerows(df)  
+with open ('output.txt','w') as fout:
+    writer = csv.writer(fout)
+    writer.writerows(sst)  
