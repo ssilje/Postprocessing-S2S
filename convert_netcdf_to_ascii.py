@@ -41,8 +41,9 @@ for x in range(len(sst)):
 #print(sst2.shape)
 #print(time.shape)
 
-test=np.concatenate((sst2,time), axis=0)        
-#print(column_test)   
+test=np.concatenate((sst2,time), axis=0)  
+
+print(test)   
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
 #print(d[:,21,68])
