@@ -33,6 +33,5 @@ with open ('output.txt','w') as fout:
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
-   # columns = sst,np.squeeze(time).shape
-   columns = sst,time
-   writer.writerow(columns)
+    columns = sst,time
+    writer.writerow(columns)
