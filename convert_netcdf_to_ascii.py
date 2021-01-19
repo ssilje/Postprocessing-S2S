@@ -42,9 +42,14 @@ for x in sst:
 sst_new = str(sst[:])[1:-1]
 sst_new=str(sst_new)[1:-1]
 print(sst_new)
-print(sst2)
+#print(sst2)
 print(time)
+print(len(sst_new))
+print(len(sst_new[0])
 
+print(len(time))
+print(len(time[0])
+      
 test=np.concatenate((sst2,time), axis=1)  
 
 print(test)   
