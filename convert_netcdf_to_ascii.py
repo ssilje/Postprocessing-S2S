@@ -26,12 +26,11 @@ print(sst)
 #print(sst2)
 column_test = []
 for x in sst:
-    for y in time:
         sst_new = str(x)[1:-1]
         sst_new=str(sst_new)[1:-1]
         #print(sst_new)
         #column_test=x,y
-        column_test += sst_new,y
+        column_test += sst_new,time2[x]
        # print(sst_new,y)
         
 print(column_test)   
