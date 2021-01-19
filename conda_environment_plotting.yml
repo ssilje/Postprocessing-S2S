@@ -16,3 +16,5 @@ dependencies:
   - ecmwf-api-client
   - properscoring
   - scipy
+  - pylab
+  - csv
