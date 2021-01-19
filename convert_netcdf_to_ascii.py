@@ -26,4 +26,4 @@ print(lon.shape)
 with open ('output.txt','w') as fout:
     writer = csv.writer(fout)
     writer.writerows(sst)  
-    writer.writerows(time)  
+    writer.writerows(sst)  
