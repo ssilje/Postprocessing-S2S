@@ -18,7 +18,8 @@ time = f.variables['time'][:]
 #print(f.shape)
 print(time.shape)
 print(sst.shape)
-
+time2= np.squeeze(time).shape
+print(time2.shape)
 #data = xr.open_dataset("/home/python/PBLH_Exp_08_jul_2006.nc")
 #d = xr.DataArray(data.variables['PBLH'])
 #print(d[:,21,68])
@@ -32,5 +33,6 @@ with open ('output.txt','w') as fout:
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
     writer.writerow(('SST', 'time'))
-    columns = sst,np.squeeze(time).shape
-    writer.writerow(columns)
+   # columns = sst,np.squeeze(time).shape
+   columns = sst,time
+   writer.writerow(columns)
