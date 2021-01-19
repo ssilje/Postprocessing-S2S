@@ -27,8 +27,8 @@ print(time2)
 #df = d[:,21,68]
 with open ('output.txt','w') as fout:
     writer = csv.writer(fout)
-    writer.writerows(sst)  
-    writer.writerows(sst)  
+    writer.writerow(sst)  
+    writer.writerow(time2)  
 
 with open('example1.csv', 'w') as result:
     writer = csv.writer(result, delimiter=",")
