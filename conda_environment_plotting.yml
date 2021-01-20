@@ -17,4 +17,5 @@ dependencies:
   - properscoring
   - scipy
   - cdo
+  - xesmf 
 
