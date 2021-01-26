@@ -19,3 +19,4 @@ dependencies:
   - cdo
   - xesmf 
   - seaborn 
+  - mplotutils 
