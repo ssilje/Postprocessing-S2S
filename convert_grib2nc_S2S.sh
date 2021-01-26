@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATA_S2S='/nird/projects/NS9853K/DATA/S2S/hindcast/ECMWF/sfc/sst/'
-workdir=/nird/projects/NS9001K/sso102/S2S/work.$$
+workdir=/nird/projects/NS9001K/sso102/S2S/netcdf
  
 if [ ! -d ${workdir}/ ]
 then
