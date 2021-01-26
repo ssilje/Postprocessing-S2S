@@ -52,7 +52,7 @@ for date in ${d}; do # for (1)
 	  	    HC=`expr ${HC} + 1`
 	else
 	    echo "file does not exist: "
-            echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
+            echo ${DATA_S2S}/sst_CY46R1_${date}_cf.grb
 	fi    
    
     rm  -r ${workdir}/tmp
