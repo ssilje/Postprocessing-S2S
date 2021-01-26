@@ -13,5 +13,7 @@ dirbase = '/nird/projects/NS9001K/sso102/S2S/netcdf'
 file='sst_CY46R1_2019-07-29_cf_EUR.nc'
 data = '%s/%s'%(dirbase,file)
 
-#fN = 'data/ARGO_ATL_20171230.nc'
-#ATL = xr.open_dataset(fN)
+
+dataopen = xr.open_dataset(data)
+
+print(dataopen.variables.keys())
