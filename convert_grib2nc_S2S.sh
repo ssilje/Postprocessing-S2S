@@ -35,7 +35,7 @@ for date in ${d}; do # for (1)
     m=$(echo ${date} | cut -d'-' -f2)
     day=$(echo ${date} | cut -d'-' -f3)
 
-  if [ -f ${DATA_S2S}/sst_CY46R1_${date}_cf.grb]; then 
+  if [ -f ${DATA_S2S}/sst_CY46R1_${date}_cf.grb ]; then 
             echo "file exist: "
 	    echo ${DATA_S2S}/sst_CY46R1_${date}_cf.grb
 	    if [ ! -d ${workdir}/tmp ]
