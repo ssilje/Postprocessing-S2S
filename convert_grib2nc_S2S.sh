@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DATA_S2S='/cluster/work/users/sso102/S2S/ECMWF/TOT_PR'
-workdir=/cluster/work/users/sso102/S2S/work.$$
+DATA_S2S='/nird/projects/NS9853K/DATA/S2S/hindcast/ECMWF/sfc/sst/'
+workdir=/nird/projects/NS9001K/sso102/S2S/work.$$
  
 if [ ! -d ${workdir}/ ]
 then
@@ -35,14 +35,9 @@ for date in ${d}; do # for (1)
     m=$(echo ${date} | cut -d'-' -f2)
     day=$(echo ${date} | cut -d'-' -f3)
 
-    HC='1'
-        
-    while [ ${HC} -le 20  ] ; do # 20 years hindcast # while (2)
-
-	yHC=`expr ${y} - $HC`
-	if [ -f ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ]; then 
+  if [ -f ${DATA_S2S}/sst_CY46R1_${date}_cf.grb]; then 
             echo "file exist: "
-	    echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
+	    echo ${DATA_S2S}/sst_CY46R1_${date}_cf.grb
 	    if [ ! -d ${workdir}/tmp ]
 	    then
 		mkdir ${workdir}/tmp
@@ -51,70 +46,15 @@ for date in ${d}; do # for (1)
 		mkdir ${workdir}/tmp
 	    fi
   
-	    cdo remapcon,r720x360  ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb
-	    cdo sellonlatbox,-30,60,30,75  ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb
+	    cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}//sst_CY46R1_${date}_cf.grb ${workdir}/sst_CY46R1_${date}_cf_EUR.grb
 	    
-	    cdo -f nc copy  ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb ${workdir}/tmp.nc 
-	    #echo "/cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE/LAT_LON_r720x360_EUR.nc"
-	    #echo "${workdir}/tmp.nc"
-	    if [ -f ${workdir}/tmp.nc ]; then
-		"file exist"
-	    fi
-	    ncks -A -v lon,lat /cluster/home/sso102/GRIDINFO/GRID_REGIONS/EUROPE/LAT_LON_r720x360_EUR.nc ${workdir}/tmp.nc 
-	    cdo divc,6 ${workdir}/tmp.nc ${workdir}/tmp2.nc # need to check if correct, but the TOT_PR is given as kms-2/6h
-	    ncrename  -v tp,pr ${workdir}/tmp2.nc ${workdir}/tmp3.nc
-	    ncatted -O -a units,pr,o,c,mm/day ${workdir}/tmp3.nc 
-	    cdo splitsel,1 ${workdir}/tmp3.nc  ${workdir}/tmp/tmp_
-	    rm ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360.grb 
-	    rm ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_r720x360_EUR.grb 
-	    rm ${workdir}/tmp.nc ${workdir}/tmp2.nc ${workdir}/tmp3.nc 
-	    echo "workdir"
-	    ls ${workdir}
-	    
-	    #daynum=$(echo | ls -L | wc -l)
-	    
-	    #echo $daynum
-	    n=0
-	    while [ ${n} -le 40  ] ; do # while (3)
-		cd ${workdir}/tmp
-		#echo $n
-		nm=`expr ${n} - 1`
-		#echo $nm
-		if [ $n -le 10 ]; then # if (4)
-		    if [ $n -eq 0 ]; then  # if (5) start
-			echo "lead time $n" 
-			cp tmp_000000.nc TP_${n}.nc
-			
-		    elif [ $n -eq 10  ]; then 
-			echo "lead time $n"
-			ncdiff tmp_0000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-		    elif  [ $n -gt 0 ] && [ $n -lt 10 ]; then
-			echo "lead time $n"
-			ncdiff tmp_00000${n}.nc tmp_00000${nm}.nc TP_${n}.nc
-		    fi  # if (5) done
-		    
-		else 
-		    echo "lead time $n"
-		    ncdiff tmp_0000${n}.nc tmp_0000${nm}.nc TP_${n}.nc
-		fi  # if (4) done
-		cdo showdate TP_${n}.nc
-		
-		
-		n=`expr ${n} + 1`
-	    done  # while (3) done
-	    cd ${workdir}/tmp
-	    #rm  ${workdir}/tmp/tmp_*.nc 
-            echo "${workdir}/tmp"
-	    ls ${workdir}/tmp   
-	    cdo mergetime  ${workdir}/tmp/TP_*.nc ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}_daily.nc
-	    #rm  -r ${workdir}/tmp
-	    # rm   ${workdir}/tp_cf_${date}_hc_${yHC}-${m}-${day}.nc
-	    HC=`expr ${HC} + 1`
+	    cdo -f nc copy  ${workdir}/sst_CY46R1_${date}_cf_EUR.grb ${workdir}/sst_CY46R1_${date}_cf_EUR.nc
+	  	    HC=`expr ${HC} + 1`
 	else
 	    echo "file does not exist: "
             echo ${DATA_S2S}/tp_cf_${date}_hc_${yHC}-${m}-${day}.grb
 	fi    
-    done  # while (2) done
+   
     rm  -r ${workdir}/tmp
 done # for (1)
 
