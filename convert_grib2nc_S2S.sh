@@ -53,7 +53,7 @@ for date in ${d}; do # for (1)
 	    echo "file does not exist: "
             echo ${DATA_S2S}/sst_CY46R1_${date}_${type}.grb
 	fi    
-   
+    rm ${workdir}/*.grb
     rm  -r ${workdir}/tmp
 done # for (1)
 
