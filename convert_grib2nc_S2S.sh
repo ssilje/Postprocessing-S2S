@@ -7,9 +7,7 @@ workdir=/nird/projects/NS9001K/sso102/S2S/netcdf
 if [ ! -d ${workdir}/ ]
 then
     mkdir ${workdir}
-else
-    rm -r ${workdir}
-    mkdir ${workdir}
+
 fi
 
 #DATE='2019-07-01 2019-07-04 2019-07-08 2019-07-11 2019-07-15 2019-07-18 2019-07-22 2019-07-25 2019-07-29 
