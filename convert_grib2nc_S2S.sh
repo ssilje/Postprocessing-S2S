@@ -1,6 +1,6 @@
 #!/bin/bash
-
-DATA_S2S='/nird/projects/NS9853K/DATA/S2S/hindcast/ECMWF/sfc/sst/'
+type='hindcast'
+DATA_S2S='/nird/projects/NS9853K/DATA/S2S/${type}/ECMWF/sfc/sst/'
 workdir=/nird/projects/NS9001K/sso102/S2S/netcdf
  
 if [ ! -d ${workdir}/ ]
@@ -48,8 +48,8 @@ for date in ${d}; do # for (1)
   
 	    cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}//sst_CY46R1_${date}_cf.grb ${workdir}/sst_CY46R1_${date}_cf_EUR.grb
 	    
-	    cdo -f nc copy  ${workdir}/sst_CY46R1_${date}_cf_EUR.grb ${workdir}/sst_CY46R1_${date}_cf_EUR.nc
-	  	    HC=`expr ${HC} + 1`
+	    cdo -f nc copy  ${workdir}/sst_CY46R1_${date}_cf_EUR.grb ${workdir}/sst_CY46R1_${date}_${type}_cf_EUR.nc
+	  	    
 	else
 	    echo "file does not exist: "
             echo ${DATA_S2S}/sst_CY46R1_${date}_cf.grb
