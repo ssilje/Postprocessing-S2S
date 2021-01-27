@@ -21,7 +21,7 @@ dataopen = xr.open_dataset(ERA5)
 ERA5_BR = dataopen.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean()
 
 ERA5_BR_df=ERA5_BR.to_dataframe()
-ERA5_BR_mean=ERA5_BR.sel("1999-07-01":"2000-07-01").mean()
+ERA5_BR_mean=ERA5_BR.sel(time="1999-07-01":"2000-07-01").mean()
     
 
 
