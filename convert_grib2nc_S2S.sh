@@ -1,5 +1,5 @@
 #!/bin/bash
-product='hindcast'
+product='forecast'
 type='cf'
 DATA_S2S=/nird/projects/NS9853K/DATA/S2S/${product}/ECMWF/sfc/sst/
 workdir=/nird/projects/NS9001K/sso102/S2S/netcdf
