@@ -21,7 +21,7 @@ dataopen = xr.open_dataset(ERA5)
 ERA5_BR = dataopen.sel(lat=lat, lon=lon, method='nearest').resample(time='Y').mean()
 print("ERA5 DS head 15")
 print(ERA5_BR.to_dataframe().head(15))
-star_ERA5_BR=ERA5_BR.stat()
+#star_ERA5_BR=ERA5_BR.stat()
 fig = plt.figure(figsize=(15, 15))
 ERA5_BR.SST.plot()
 
