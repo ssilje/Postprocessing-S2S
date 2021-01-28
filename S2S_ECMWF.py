@@ -72,9 +72,10 @@ print(' * all:', forecast_pf_sst.shape)
 print(' * BR:', forecast_pf_sst_BR.shape)
 print(' * time:', forecast_pf_time.shape)
 
+print("hindcast pf DS head 15")
 
 hindcast_pf_sst_dst=hindcast_pf_sst.to_dataframe()
-print(hindcast_pf_sst_dst)
+print(hindcast_pf_sst.to_dataframe().head(15))
 
 fig = plt.figure(figsize=(15, 15))
 hindcast_pf_sst_BR.plot()
