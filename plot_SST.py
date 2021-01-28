@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import xarray as xr
 import cartopy.crs as ccrs
 import pandas as pd
+import matplotlib.dates as mdates
 # Bergen
 lat = 60.23
 lon = 5.19
