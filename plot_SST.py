@@ -34,7 +34,7 @@ print("ERA5 DS head 15")
 print(ERA5_BR.to_dataframe().head(15))
 #star_ERA5_BR=ERA5_BR.stat()
 fig = plt.figure(figsize=(15, 15))
-f, ax = plt.subplots(1, 1)
+#f, ax = plt.subplots(1, 1)
 ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
 #ERA5_BR.SST.plot()
 # add labels
