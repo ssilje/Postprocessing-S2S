@@ -33,8 +33,18 @@ ERA5_BR_std_df=ERA5_BR_std.to_dataframe()
 print("ERA5 DS head 15")
 print(ERA5_BR.to_dataframe().head(15))
 #star_ERA5_BR=ERA5_BR.stat()
-fig = plt.figure(figsize=(15, 15))
-ERA5_BR.SST.plot()
-ERA5_BR.SST_std.plot()-ERA5_BR.SST
+
+f, ax = plt.subplots(1, 1)
+ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
+#ERA5_BR.SST.plot()
+# add labels
+
+ax.set_xlabel('time')
+ax.set_ylabel('SST [K]')
+ax.set_title('SST July', fontsize=16)
+
+
+
+#ERA5_BR.SST_std.plot()-ERA5_BR.SST
 #ERA5_BR.groupby(ERA5_BR_df.index.1).mean().plot()
 fig.savefig('SST_Bergen_v2.png')
