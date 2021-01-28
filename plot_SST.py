@@ -37,8 +37,8 @@ print(ERA5_BR.to_dataframe().head(15))
 #fig = plt.figure(figsize=(15, 15))
 f, ax = plt.subplots(1, 1)
 ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
-#ERA5_BR.SST.plot()
-# add labels
+ax.plot(ERA5_BR.time, ERA5_BR_std.SST+ERA5_BR.SST, color='0.5')
+
 xfmt = mdates.DateFormatter('%d')
 ax.xaxis.set_major_formatter(xfmt)
 
