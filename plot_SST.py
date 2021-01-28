@@ -41,7 +41,7 @@ print(ERA5_BR_std.to_dataframe().head(15))
 f, ax = plt.subplots(1, 1)
 ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
 ax.plot(ERA5_BR.time, ERA5_BR.SST-ERA5_BR_std.SST, color='0.5')
-ax.plot(ERA5_BR.time, ERA5_BR.SST?ERA5_BR_std.SST, color='0.5')
+ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
 
 xfmt = mdates.DateFormatter('%d')
 ax.xaxis.set_major_formatter(xfmt)
