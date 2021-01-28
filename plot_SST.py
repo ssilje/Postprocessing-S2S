@@ -39,7 +39,7 @@ f, ax = plt.subplots(1, 1)
 ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
 #ERA5_BR.SST.plot()
 # add labels
-xfmt = mdates.DateFormatter('%d-%m-%y %H:%M')
+xfmt = mdates.DateFormatter('%d')
 ax.xaxis.set_major_formatter(xfmt)
 
 ax.set_xlabel('time')
