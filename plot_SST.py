@@ -26,13 +26,16 @@ ERA5_BR = dataopen.sel(lat=lat, lon=lon, method='nearest')
 ERA5_BR_df=ERA5_BR.to_dataframe()
 
 dataopen_std = xr.open_dataset(ERA5_std) 
-ERA5_BR_std = dataopen.sel(lat=lat, lon=lon, method='nearest')
+ERA5_BR_std = dataopen_std.sel(lat=lat, lon=lon, method='nearest')
 ERA5_BR_std_df=ERA5_BR_std.to_dataframe()
     
 
 
 print("ERA5 DS head 15")
 print(ERA5_BR.to_dataframe().head(15))
+
+print("ERA5 std DS head 15")
+print(ERA5_BR_std.to_dataframe().head(15))
 #star_ERA5_BR=ERA5_BR.stat()
 #fig = plt.figure(figsize=(15, 15))
 f, ax = plt.subplots(1, 1)
