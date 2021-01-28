@@ -77,8 +77,6 @@ hindcast_pf_sst_dst=hindcast_pf_sst.to_dataframe()
 print(hindcast_pf_sst_dst)
 
 fig = plt.figure(figsize=(15, 15))
-#ERA5_sst_BR.plot()
-ERA5_BR
 hindcast_pf_sst_BR.plot()
 hindcast_cf_sst_BR.plot()
 forecast_cf_sst_BR.plot()
