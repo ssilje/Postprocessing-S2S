@@ -16,11 +16,17 @@ lon = 5.19
 
 dirbase = '/nird/projects/NS9001K/sso102/S2S/DATA/SST'
 fERA5='ERA5_sst_1999-2019_07_daymean_ydaymean.nc'
+fERA5_std='ERA5_sst_1999-2019_07_daymean_ydaystd.nc'
 ERA5 = '%s/%s'%(dirbase,fERA5)
+ERA5_std = '%s/%s'%(dirbase,fERA5_std)
+
 dataopen = xr.open_dataset(ERA5) 
 ERA5_BR = dataopen.sel(lat=lat, lon=lon, method='nearest')
 ERA5_BR_df=ERA5_BR.to_dataframe()
-#ERA5_BR_mean=ERA5_BR.sel(time="1999-07-01":"2000-07-01").mean()
+
+dataopen_std = xr.open_dataset(ERA5_std) 
+ERA5_BR_std = dataopen.sel(lat=lat, lon=lon, method='nearest')
+ERA5_BR_std_df=ERA5_BR_std.to_dataframe()
     
 
 
@@ -29,5 +35,6 @@ print(ERA5_BR.to_dataframe().head(15))
 #star_ERA5_BR=ERA5_BR.stat()
 fig = plt.figure(figsize=(15, 15))
 ERA5_BR.SST.plot()
+ERA5_BR.SST_std.plot()-ERA5_BR.SST
 #ERA5_BR.groupby(ERA5_BR_df.index.1).mean().plot()
 fig.savefig('SST_Bergen_v2.png')
