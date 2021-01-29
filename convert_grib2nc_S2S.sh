@@ -4,9 +4,9 @@ type='pf'
 DATA_S2S=/nird/projects/NS9853K/DATA/S2S/${product}/ECMWF/sfc/sst/
 workdir=/nird/projects/NS9001K/sso102/S2S/netcdf
  
-if [ ! -d ${workdir2}/ ]
+if [ ! -d ${workdir}/ ]
 then
-    mkdir ${workdir2}
+    mkdir ${workdir}
 
 fi
 
@@ -24,7 +24,7 @@ fi
 #        2020-06-01 2020-06-04 2020-06-08 2020-06-11 2020-06-15 2020-06-18 2020-06-22 2020-06-25 2020-06-29'
 
 
-d='2019-07-01 2019-07-04 2019-07-08 2019-07-11 2019-07-15 2019-07-18 2019-07-22 2019-07-25 2019-07-29'
+d='2019-07-01'
 
 #d='2019-07-01'
 
@@ -47,8 +47,8 @@ for date in ${d}; do # for (1)
   
 	    cdo sellonlatbox,-30,60,30,75  ${DATA_S2S}//sst_CY46R1_${date}_${type}.grb ${workdir}/sst_CY46R1_${date}_${type}_EUR.grb
 	    
-	    #cdo -f nc copy  ${workdir}/sst_CY46R1_${date}_${type}_EUR.grb ${workdir}/sst_CY46R1_${date}_${product}_${type}_EUR.nc
-	    ncl_convert2nc ${workdir}/sst_CY46R1_${date}_${type}_EUR.grb ${workdir}/sst_CY46R1_${date}_${product}_${type}_EUR_ncl.nc
+	    cdo -f nc copy  ${workdir}/sst_CY46R1_${date}_${type}_EUR.grb ${workdir}/sst_CY46R1_${date}_${product}_${type}_EUR.nc
+	    #ncl_convert2nc ${workdir}/sst_CY46R1_${date}_${type}_EUR.grb ${workdir}/sst_CY46R1_${date}_${product}_${type}_EUR_ncl.nc
 	  	    
 	else
 	    echo "file does not exist: "
