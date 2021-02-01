@@ -18,12 +18,17 @@ dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats sta
 #dates = pd.date_range("20190701", periods=52, freq="W") This one does not include the first date (20190701)
 
 #for d in dates_monday
-d = dates[0].strftime('%Y-%m-%d')
+d = dates_monday[0].strftime('%Y-%m-%d')
 file = '%s/%s/%s_%s_%s_%s%s'%(dir,var,var,forecastcycle,d,ftype,'.grb')
 ds_grib = xr.open_dataset(file,engine='cfgrib')
 
 ds_grib_crop = ds_grib.sel(latitude=lat, longitude=lon, method='nearest')
 #ds_grib_reg = ds_grib.sel(latitude=slice(50,30), longitude=slice(180,240)) to select a whole region
+
+ds_crop= ds_grib_crop.to_dataframe()
+
+ds_crop_mean = ds_crop.mean(level=0) # level 0 shape 10,4
+ds_crop_mean = ds_crop.mean(level=1) # level 1 shape 46,4
 
 
 
