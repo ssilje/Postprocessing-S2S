@@ -18,5 +18,6 @@ dependencies:
   - scipy
   - cdo
   - xesmf 
-  - seaborn 
+  - seaborn
+  - cfgrib
 
