@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.dates as mdates
 
 product = 'hindcast' # forecast hindcast
-dirbase = '/nird/projects/NS9853K/DATA/S2S/'
+dirbase = '/nird/projects/NS9853K/DATA/S2S'
 dir = '%s/%s/%s/'%(dirbase,product,'/ECMWF/sfc')
 forecastcycle = 'CY46R1'
 var='sst'
@@ -18,5 +18,6 @@ dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats sta
 
 #for d in dates_monday
 d = dates[0].strftime('%Y-%m-%d')
-file = '%s/%s/%s_%s_'%(dir,var,var,forecastcycle,d,'_',ftype,'.grb')
+file = '%s/%s/%s_%s_%s_%s%s'%(dir,var,var,forecastcycle,d,ftype,'.grb')
+
 
