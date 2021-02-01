@@ -10,7 +10,8 @@ dir = '%s/%s/%s/'%(dirbase,product,'/ECMWF/sfc')
 forecastcycle = 'CY46R1'
 var='sst'
 ftype='pf' #cf, pf
-
+lat=60.23
+lon=5.19
 dates_monday = pd.date_range("20190701", periods=52, freq="7D") # forecats start Monday
 dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats start Thursday
 
@@ -19,5 +20,11 @@ dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats sta
 #for d in dates_monday
 d = dates[0].strftime('%Y-%m-%d')
 file = '%s/%s/%s_%s_%s_%s%s'%(dir,var,var,forecastcycle,d,ftype,'.grb')
+ds_grib = xr.open_dataset(file,engine='cfgrib')
+
+ds_grib_crop = ds_grib.sel(latitude=lat, longitude=lon, method='nearest')
+#ds_grib_reg = ds_grib.sel(latitude=slice(50,30), longitude=slice(180,240)) to select a whole region
+
+
 
 
