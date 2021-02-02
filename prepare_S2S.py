@@ -25,7 +25,7 @@ dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats sta
 for idate in dates_monday:
     d = idate.strftime('%Y-%m-%d')
     filein = '%s/%s_%s_%s_%s%s'%(DATAS2S,var_short,cycle,d,ftype,'.grb')
-    filein_tmp = '%s/%s_%s_%s_%s%s'%(DATAS2S,var_short,cycle,d,ftype,'_EUR.grb')
+    filein_tmp = '%s/%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,'_EUR.grb')
     fileout_tmp = '%s/%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,'.nc')
     fileout_EUR = '%s/%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,'_EUR1deg.nc')
     os.system('cdo sellonlatbox,-30,60,30,75 ' + filein  + ' ' + filein_tmp)
