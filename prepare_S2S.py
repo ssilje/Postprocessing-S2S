@@ -29,5 +29,5 @@ for idate in dates_monday:
     fileout_EUR = '%s/%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,'_EUR1deg.nc')
     os.system('grib_to_netcdf -I method,type,stream,refdate -o ' + fileout_tmp  + ' ' + filein)
     os.system('cdo sellonlatbox,-30,60,30,75 ' + fileout_tmp  + ' ' + fileout_EUR)
-    os.system('rm ' + fileout_tmp)
+    #os.system('rm ' + fileout_tmp)
     
