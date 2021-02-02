@@ -6,7 +6,7 @@ import matplotlib.dates as mdates
 import os,sys
 
 DATABASE = '/nird/projects/NS9853K/DATA'
-workdir = '/nird/projects/NS9001K/sso102/DATA/test'
+workdir = '/nird/projects/NS9001K/sso102/DATA/test2'
 var_long='sea_surface_temperature' 
 var_short='sst' 
 
@@ -21,6 +21,8 @@ DATAS2S = '%s/%s/%s/%s/%s'%(DATABASE,'S2S', product,'/ECMWF/sfc',var_short)
 dates_monday = pd.date_range("20190701", periods=52, freq="7D") # forecats start Monday
 dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats start Thursday
 
+if not os.path.exists(workdir)  :
+                os.makedirs(workdir)
 
 for idate in dates_monday:
     d = idate.strftime('%Y-%m-%d')
