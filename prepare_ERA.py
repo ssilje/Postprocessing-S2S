@@ -17,12 +17,12 @@ DATAERA = '%s/%s/'%(DATABASE,'SFE/ERA_daily_nc')
 
 
 ## Regrid ERA
-for idate in DATE
-d = idate.strftime('%Y%m%d')
-filein = '%s/%s_%s%s'%(DATAERA,var_long,d,'.nc')
-fileout_tmp = '%s/%s_%s%s'%(workdir,var_long,d,'_remapcon.nc')
-fileout_EUR = '%s/%s_%s%s'%(workdir,var_long,d,'_remapcon_EUR.nc')
-os.system('cdo remapcon,r360x181 ' + filein  + ' ' + fileout_tmp)
-os.system('cdo remapcon,r360x181 ' + fileout_tmp  + ' ' + fileout_EUR)
-os.system('rm ' + fileout_tmp)
+for idate in DATE:
+    d = idate.strftime('%Y%m%d')
+    filein = '%s/%s_%s%s'%(DATAERA,var_long,d,'.nc')
+    fileout_tmp = '%s/%s_%s%s'%(workdir,var_long,d,'_remapcon.nc')
+    fileout_EUR = '%s/%s_%s%s'%(workdir,var_long,d,'_remapcon_EUR.nc')
+    os.system('cdo remapcon,r360x181 ' + filein  + ' ' + fileout_tmp)
+    os.system('cdo remapcon,r360x181 ' + fileout_tmp  + ' ' + fileout_EUR)
+    os.system('rm ' + fileout_tmp)
 
