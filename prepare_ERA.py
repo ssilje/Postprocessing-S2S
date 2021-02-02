@@ -11,8 +11,8 @@ var_long='sea_surface_temperature'
 
 # 10m_u_component_of_wind 2m_temperature sea_surface_temperature total_precipitation 10m_v_component_of_wind mean_sea_level_pressure snowfall
 
-#DATE = pd.date_range(start='1999-07-01', end='2020-07-01')
-DATE = pd.date_range(start='1999-07-01', end='2000-07-01')
+DATE = pd.date_range(start='1999-07-01', end='2020-07-01')
+#DATE = pd.date_range(start='1999-07-01', end='2000-07-01')
 
 DATAERA = '%s/%s/'%(DATABASE,'SFE/ERA_daily_nc')
 
