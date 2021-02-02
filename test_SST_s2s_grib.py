@@ -3,6 +3,26 @@ import xarray as xr
 import cartopy.crs as ccrs
 import pandas as pd
 import matplotlib.dates as mdates
+import os,sys
+
+meta = {
+    'sst': {
+        'param': '228228',  
+        'levtype': 'sfc',
+        'grid': '1/1',
+        'step': '/'.join(['%i'%i for i in range(0,1104,24)]) # 40 days forecast
+    }
+
+}
+
+for filename in (
+    'VAR',
+):
+
+for k,v in meta[filename].items():
+                    dic[k] = v
+
+
 
 product = 'hindcast' # forecast hindcast
 dirbase = '/nird/projects/NS9853K/DATA/S2S'
