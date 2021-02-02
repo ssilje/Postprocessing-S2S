@@ -25,7 +25,9 @@ for idate in DATE:
     filein = '%s/%s_%s%s'%(DATAERA,var_long,d,'.nc')
     fileout_tmp = '%s/%s_%s%s'%(workdir,var_long,d,'_remapcon.nc')
     fileout_EUR = '%s/%s_%s%s'%(workdir,var_long,d,'_EUR1deg.nc')
-    os.system('cdo remapcon,r360x181 ' + filein  + ' ' + fileout_tmp)
-    os.system('cdo sellonlatbox,-30,60,30,75 ' + fileout_tmp  + ' ' + fileout_EUR)
-    os.system('rm ' + fileout_tmp)
+    
+    if not os.path.isfile(fileout_EUR):
+        os.system('cdo remapcon,r360x181 ' + filein  + ' ' + fileout_tmp)
+        os.system('cdo sellonlatbox,-30,60,30,75 ' + fileout_tmp  + ' ' + fileout_EUR)
+        os.system('rm ' + fileout_tmp)
 
