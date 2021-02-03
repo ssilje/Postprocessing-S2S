@@ -14,7 +14,6 @@ lat = 60.23
 lon = 5.19
 
 ## ERA5
-
 dirbase = '/nird/projects/NS9001K/sso102/S2S/DATA/SST'
 fERA5='ERA5_sst_1999-2019_07_daymean_ydaymean.nc'
 fERA5_std='ERA5_sst_1999-2019_07_daymean_ydaystd.nc'
@@ -28,19 +27,28 @@ ERA5_BR_df=ERA5_BR.to_dataframe()
 dataopen_std = xr.open_dataset(ERA5_std) 
 ERA5_BR_std = dataopen_std.sel(lat=lat, lon=lon, method='nearest')
 ERA5_BR_std_df=ERA5_BR_std.to_dataframe()
-    
-
-
 print("ERA5 DS head 15")
 print(ERA5_BR.to_dataframe().head(15))
 
 print("ERA5 std DS head 15")
 print(ERA5_BR_std.to_dataframe().head(15))
-#star_ERA5_BR=ERA5_BR.stat()
-#fig = plt.figure(figsize=(15, 15))
+
+## S2S
+dirbase_S2S = '/nird/projects/NS9001K/sso102/DATA/test2'
+fS2S='sst_CY46R1_2019-07-01_pf.nc'
+S2S = '%s/%s'%(dirbase_S2S,fS2S)
+dataopen_S2S = xr.open_dataset(S2S) 
+S2S_BR = dataopen_S2S.sel(latitude=lat, longitude=lon, method='nearest')
+S2S_BR_df=S2S_BR.to_dataframe()
+
+SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
+
+SST_mean3=SST_mean2.mean(dim='number') # mean over ensnumber
+
 f, ax = plt.subplots(1, 1)
 ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
 ax.plot(ERA5_BR.time, ERA5_BR.SST-ERA5_BR_std.SST, color='0.5')
+ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
 ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
 
 xfmt = mdates.DateFormatter('%d')
