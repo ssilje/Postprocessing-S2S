@@ -29,5 +29,5 @@ for idate in dates_monday:
     filein = '%s/%s_%s_%s_%s%s'%(DATAS2S,var_short,cycle,d,ftype,'.grb')
     fileout = '%s/%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,'.nc')
         if not os.path.isfile(fileout):
-        os.system('grib_to_netcdf -I method,type,stream,refdate -o ' + fileout  + ' ' + filein_tmp)
+            os.system('grib_to_netcdf -I method,type,stream,refdate -o ' + fileout  + ' ' + filein_tmp)
     
