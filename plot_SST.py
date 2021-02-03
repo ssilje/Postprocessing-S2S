@@ -35,15 +35,14 @@ print(ERA5_BR_std.to_dataframe().head(15))
 
 ## S2S
 dirbase_S2S = '/nird/projects/NS9001K/sso102/DATA/test2'
-fS2S='sst_CY46R1_2019-07-01_pf.nc'
+fS2S='sst_CY46R1_2019-07-01_pf_2018-07-01.nc'
 S2S = '%s/%s'%(dirbase_S2S,fS2S)
 dataopen_S2S = xr.open_dataset(S2S) 
 S2S_BR = dataopen_S2S.sel(latitude=lat, longitude=lon, method='nearest')
 S2S_BR_df=S2S_BR.to_dataframe()
 
-SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
-
-SST_mean3=SST_mean2.mean(dim='number') # mean over ensnumber
+#SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
+SST_mean=S2S_BR.sst.mean(dim='number') # mean over hindcast date
 
 f, ax = plt.subplots(1, 1)
 ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
