@@ -29,8 +29,8 @@ for idate in dates_monday:
     d = idate.strftime('%Y-%m-%d')
     for hdate in dates_monday_hc:
         dh = hdate.strftime('%Y-%m-%d')
-        filein = '%s/%s_%s_%s_%s_%s%s'%(DATAS2S,var_short,cycle,d,ftype,dh'.grb')
-        fileout = '%s/%s_%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,dh'.nc')
+        filein = '%s/%s_%s_%s_%s_%s%s'%(DATAS2S,var_short,cycle,d,ftype,dh,'.grb')
+        fileout = '%s/%s_%s_%s_%s_%s%s'%(workdir,var_short,cycle,d,ftype,dh,'.nc')
         if not os.path.isfile(fileout):
             os.system('grib_to_netcdf -I method,type,stream,refdate -o ' + fileout  + ' ' + filein)
     
