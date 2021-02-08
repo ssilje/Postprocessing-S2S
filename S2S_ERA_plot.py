@@ -75,8 +75,7 @@ for month in range(1,13):
 
 ## S2S
 dirbase_S2S = '/nird/projects/NS9001K/sso102/DATA/test2'
-fS2S='sst_CY46R1_2019-07-01_pf_2018-07-01.nc'
-#dates_monday = pd.date_range("20190701", periods=52, freq="7D") # forecats start Monday
+#fS2S='sst_CY46R1_2019-07-01_pf_2018-07-01.nc'
 dates_monday = pd.date_range("20190701", periods=1, freq="7D") # forecats start Monday
 dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats start Thursday
 
@@ -92,15 +91,22 @@ for idate in dates_monday:
         dS2S = '%s/%s_%s_%s_%s_%s%s'%(dirbase_S2S,var_short,cycle,d,ftype,dh,'.nc')
         dataopen = xr.open_dataset(dS2S)
         S2S_BR_daily = dataopen.sst.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
-        s2s_mean = S2S_BR_daily.sst[S2S_BR_daily.index.get_level_values('time') == dh].mean()
-        s2s_std = S2S_BR_daily.sst[S2S_BR_daily.index.get_level_values('time') == dh].std()
-        #date = pd.date_range(hdate,periods=1)
-        if d == '2019-07-01': # first forecast day
-            S2S_BR_ensmean_df = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST"])
-        else:
-             tmp_mean = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST"])
-             S2S_BR_ensmean_df = S2S_BR_ensmean_df.append(tmp_mean)   
-        
+        ## Loop through the whole forecast
+        forecast_leadtime = pd.date_range(dh, periods=46, freq="D")
+        for fc_lt in forecast_leadtime: 
+            s2s_mean = S2S_BR_daily.sst[S2S_BR_daily.index.get_level_values('time') == fc_lt].mean()
+            s2s_std = S2S_BR_daily.sst[S2S_BR_daily.index.get_level_values('time') == fc_lt].std()
+            print(d)
+            print(dh)
+            if d == "2019-07-01" and dh == "1999-07-01" and fc_lt == "1999-07-01": # first forecast day
+                S2S_BR_df = pd.DataFrame({"ensmean SST": s2s_mean, "ensstd SST": s2s_std }, index=pd.date_range(fc_lt,periods=1), columns=["ensmean SST","ensstd SST"])
+            else:
+                tmp_mean = pd.DataFrame({"ensmean SST": s2s_mean, "ensstd SST": s2s_std }, index=pd.date_range(fc_lt,periods=1), columns=["ensmean SST","ensstd SST"])
+                #tmp_mean = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST","ensstd SST"])
+                S2S_BR_df = S2S_BR_df.append(tmp_mean)   
+ 
+
+
         #if i == 0 and y == syr:
              #   ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
         #else:
