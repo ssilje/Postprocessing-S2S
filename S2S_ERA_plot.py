@@ -18,15 +18,15 @@ lon = 5.19
 var_longname='sea_surface_temperature'
 syr = 2000
 eyr = 2005
-
+dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
 
 for month in range(1,13):
     for y in range(syr,eyr):
         dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
-        print(dates_month)
+        #print(dates_month)
 #
 ## ERA5
-        dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
+        
         for i,d in enumerate(dates_month):
             dERA5 = '%s/%s_%s_%s'%(dirbase,var_longname,d.strftime('%Y%m%d'),'EUR1deg.nc')
             dataopen = xr.open_dataset(dERA5)
@@ -50,43 +50,16 @@ for month in range(1,13):
                     daystr = '%s'%(day)
    
                 date = pd.date_range(datetime.date(2001, month, int(day)),periods=1)
-
-                
-                ERA5_BR_day_clim = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].mean()
+                ERA5_BR_day_clim_mean = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].mean()
+                ERA5_BR_day_clim_std = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].std()
         
                 if int(day) == 1 and month == 1:
-                    ERA5_BR_dayclim_df = pd.DataFrame(ERA5_BR_day_clim, index=date, columns=["day-clim SST"])
-                    print('day = 1')
+                    ERA5_BR_dayclim_mean_df = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["day-clim SST"])
                 else:
-                    tmp = pd.DataFrame(ERA5_BR_day_clim, index=date, columns=["day-clim SST"])
-               
-                    ERA5_BR_dayclim_df = ERA5_BR_dayclim_df.append(tmp)   
-    
-                print(ERA5_BR_dayclim_df) 
-                
+                    tmp_mean = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                    ERA5_BR_dayclim_mean_df = ERA5_BR_dayclim_mean_df.append(tmp)   
 
- 
-
-
-
-                
-                
-           # print(i)
-           # print(j)
-        
-for day in range(1,monthrange(2001, month)[1]): # just piked a year without leap year
-    ERA5_BR_day_clim = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==day].mean()
-
-
-
-dataopen_std = xr.open_dataset(ERA5_std) 
-ERA5_BR_std = dataopen_std.sel(lat=lat, lon=lon, method='nearest')
-ERA5_BR_std_df=ERA5_BR_std.to_dataframe()
-print("ERA5 DS head 15")
-print(ERA5_BR.to_dataframe().head(15))
-
-print("ERA5 std DS head 15")
-print(ERA5_BR_std.to_dataframe().head(15))
+                    
 
 ## S2S
 dirbase_S2S = '/nird/projects/NS9001K/sso102/DATA/test2'
