@@ -15,9 +15,21 @@ from calendar import monthrange,  monthcalendar, datetime
 # Bergen
 lat = 60.23
 lon = 5.19
-var_longname='sea_surface_temperature'
+
+var_long='sea_surface_temperature' 
+var_short='sst' 
+
+# 10m_u_component_of_wind 2m_temperature sea_surface_temperature total_precipitation 10m_v_component_of_wind mean_sea_level_pressure snowfall
+
+cycle = 'CY46R1'
+ftype= 'pf'
+product = 'hindcast' # forecast
+
+
+
 syr = 2000
 eyr = 2005
+climyear = 2018
 dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
 
 for month in range(1,13):
@@ -28,20 +40,20 @@ for month in range(1,13):
 ## ERA5
         
         for i,d in enumerate(dates_month):
-            dERA5 = '%s/%s_%s_%s'%(dirbase,var_longname,d.strftime('%Y%m%d'),'EUR1deg.nc')
+            dERA5 = '%s/%s_%s_%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'EUR1deg.nc')
             dataopen = xr.open_dataset(dERA5)
             if i == 0 and y == syr:
                 ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
             else:
                 ERA5_BR_daily = pd.concat([ERA5_BR_daily, dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()])
 
-    for i in range(len(monthcalendar(2001,month))): # year without leap year
+    for i in range(len(monthcalendar(climyear,month))): # year without leap year
 
-        for j in range(len(monthcalendar(2001,month)[i])):
+        for j in range(len(monthcalendar(climyear,month)[i])):
 
-            if monthcalendar(2001,month)[i][j] != 0:     
+            if monthcalendar(climyear,month)[i][j] != 0:     
   
-                day = '%s'%(monthcalendar(2001,month)[i][j])
+                day = '%s'%(monthcalendar(climyear,month)[i][j])
                
                 if int(day) < 10:
                     daystr = '0%s'%(day)
@@ -49,7 +61,7 @@ for month in range(1,13):
                 else:
                     daystr = '%s'%(day)
    
-                date = pd.date_range(datetime.date(2001, month, int(day)),periods=1)
+                date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
                 ERA5_BR_day_clim_mean = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].mean()
                 ERA5_BR_day_clim_std = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].std()
         
@@ -64,6 +76,41 @@ for month in range(1,13):
 ## S2S
 dirbase_S2S = '/nird/projects/NS9001K/sso102/DATA/test2'
 fS2S='sst_CY46R1_2019-07-01_pf_2018-07-01.nc'
+#dates_monday = pd.date_range("20190701", periods=52, freq="7D") # forecats start Monday
+dates_monday = pd.date_range("20190701", periods=1, freq="7D") # forecats start Monday
+dates_thursday = pd.date_range("20190704", periods=52, freq="7D") # forecats start Thursday
+
+for idate in dates_monday: 
+    d = idate.strftime('%Y-%m-%d')
+   # print('d')
+   # print(d)
+    dates_hc = pd.date_range((idate-pd.DateOffset(years=20)), periods=20, freq="AS-JUL") #20 years hindcast
+    #print(dates_hc)
+    for hdate in dates_hc:
+        dh = hdate.strftime('%Y-%m-%d')
+        print(dh)
+        dS2S = '%s/%s_%s_%s_%s_%s%s'%(dirbase_S2S,var_short,cycle,d,ftype,dh,'.nc')
+        dataopen = xr.open_dataset(dS2S)
+        S2S_BR_daily = dataopen.sst.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
+        s2s_mean = S2S_BR_daily.sst[S2S_BR_daily.index.get_level_values('time') == dh].mean()
+        s2s_std = S2S_BR_daily.sst[S2S_BR_daily.index.get_level_values('time') == dh].std()
+        #date = pd.date_range(hdate,periods=1)
+        if d == '2019-07-01': # first forecast day
+            S2S_BR_ensmean_df = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST"])
+        else:
+             tmp_mean = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST"])
+             S2S_BR_ensmean_df = S2S_BR_ensmean_df.append(tmp_mean)   
+        
+        #if i == 0 and y == syr:
+             #   ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
+        #else:
+         #       ERA5_BR_daily = pd.concat([ERA5_BR_daily, dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()])
+    
+    
+S2S_BR_mean = S2S_BR_daily.mean(dim='number')
+ens_std = ds_en.std(dim='number')   
+        
+
 S2S = '%s/%s'%(dirbase_S2S,fS2S)
 dataopen_S2S = xr.open_dataset(S2S) 
 S2S_BR = dataopen_S2S.sel(latitude=lat, longitude=lon, method='nearest')
