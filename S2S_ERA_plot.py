@@ -10,7 +10,7 @@ import cartopy.crs as ccrs
 import pandas as pd
 import matplotlib.dates as mdates
 import numpy as np
-from calendar import monthrange
+from calendar import monthrange,  monthcalendar, datetime
 
 # Bergen
 lat = 60.23
@@ -18,45 +18,57 @@ lon = 5.19
 var_longname='sea_surface_temperature'
 syr = 2000
 eyr = 2005
-month = 1
 
-for y in range(syr,eyr):
-    dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
-  
+
+for month in range(1,13):
+    for y in range(syr,eyr):
+        dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
+        print(dates_month)
+#
 ## ERA5
-    dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
-    for i,d in enumerate(dates_month):
-        dERA5 = '%s/%s_%s_%s'%(dirbase,var_longname,d.strftime('%Y%m%d'),'EUR1deg.nc')
-        dataopen = xr.open_dataset(dERA5)
-        if i == 0 and y == syr:
-            ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
-        else:
-            ERA5_BR_daily = pd.concat([ERA5_BR_daily, dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()])
+        dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
+        for i,d in enumerate(dates_month):
+            dERA5 = '%s/%s_%s_%s'%(dirbase,var_longname,d.strftime('%Y%m%d'),'EUR1deg.nc')
+            dataopen = xr.open_dataset(dERA5)
+            if i == 0 and y == syr:
+                ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
+            else:
+                ERA5_BR_daily = pd.concat([ERA5_BR_daily, dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()])
 
-for i in range(len(monthcalendar(2001,month))): # year without leap year
+    for i in range(len(monthcalendar(2001,month))): # year without leap year
+
         for j in range(len(monthcalendar(2001,month)[i])):
-            if monthcalendar(2001,month)[i][j] != 0:
-                #print(monthcalendar(2001,month)[i][j])
+
+            if monthcalendar(2001,month)[i][j] != 0:     
+  
                 day = '%s'%(monthcalendar(2001,month)[i][j])
-                print(day)
-                #if day == 1:
-                #    ERA5_BR_day_clim = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==day].mean()
-                #else:
-                #    ERA5_BR_day_clim = pd.concat(ERA5_BR_day_clim,ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==day].mean())
+               
+                if int(day) < 10:
+                    daystr = '0%s'%(day)
+                 
+                else:
+                    daystr = '%s'%(day)
+   
+                date = pd.date_range(datetime.date(2001, month, int(day)),periods=1)
+
+                
+                ERA5_BR_day_clim = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].mean()
+        
+                if int(day) == 1 and month == 1:
+                    ERA5_BR_dayclim_df = pd.DataFrame(ERA5_BR_day_clim, index=date, columns=["day-clim SST"])
+                    print('day = 1')
+                else:
+                    tmp = pd.DataFrame(ERA5_BR_day_clim, index=date, columns=["day-clim SST"])
+               
+                    ERA5_BR_dayclim_df = ERA5_BR_dayclim_df.append(tmp)   
+    
+                print(ERA5_BR_dayclim_df) 
+                
 
  
 
 
-df2 = pd.DataFrame(
-   ...:     {
-   ...:         "A": 1.0,
-   ...:         "B": pd.Timestamp("20130102"),
-   ...:         "C": pd.Series(1, index=list(range(4)), dtype="float32"),
-   ...:         "D": np.array([3] * 4, dtype="int32"),
-   ...:         "E": pd.Categorical(["test", "train", "test", "train"]),
-   ...:         "F": "foo",
-   ...:     }
-   ...: )
+
                 
                 
            # print(i)
