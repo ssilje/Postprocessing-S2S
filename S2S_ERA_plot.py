@@ -57,7 +57,7 @@ for month in range(1,13):
                     ERA5_BR_dayclim_mean_df = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["day-clim SST"])
                 else:
                     tmp_mean = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["day-clim SST"])
-                    ERA5_BR_dayclim_mean_df = ERA5_BR_dayclim_mean_df.append(tmp)   
+                    ERA5_BR_dayclim_mean_df = ERA5_BR_dayclim_mean_df.append(tmp_mean)   
 
                     
 
