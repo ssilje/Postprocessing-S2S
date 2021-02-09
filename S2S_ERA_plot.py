@@ -27,8 +27,8 @@ product = 'hindcast' # forecast
 
 
 
-syr = 2000
-eyr = 2005
+syr = 1999
+eyr = 2018
 climyear = 2018
 dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
 
