@@ -66,9 +66,9 @@ for month in range(1,13):
                 ERA5_BR_day_clim_std = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].std()
         
                 if int(day) == 1 and month == 1:
-                    ERA5_BR_dayclim_mean_df = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                    ERA5_BR_dayclim_mean_df = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["climSST"])
                 else:
-                    tmp_mean = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                    tmp_mean = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["climSST"])
                     ERA5_BR_dayclim_mean_df = ERA5_BR_dayclim_mean_df.append(tmp_mean)   
 
                     
@@ -139,9 +139,9 @@ for month in range(1,13):
                     S2S_BR_day_clim_std = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].std()
         
                 if int(day) == 1 and month == 1:
-                    S2S_BR_dayclim_mean_df = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                    S2S_BR_dayclim_mean_df = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["climSST"])
                 else:
-                    tmp_mean = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                    tmp_mean = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["climSST"])
                     S2S_BR_dayclim_mean_df = S2S_BR_dayclim_mean_df.append(tmp_mean)   
 
 
@@ -152,21 +152,22 @@ print(S2S_BR_dayclim_mean_df.head())
 #SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
 #SST_mean=S2S_BR.sst.mean(dim='number') # mean over hindcast date
 
-#f, ax = plt.subplots(1, 1)
-#ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
-#ax.plot(ERA5_BR.time, ERA5_BR.SST-ERA5_BR_std.SST, color='0.5')
+f, ax = plt.subplots(1, 1)
+ax.plot(S2S_BR_dayclim_mean_df.index,S2S_BR_dayclim_mean_df.climSST, color='0.1')
+ax.plot(ERA5_BR_dayclim_mean_df.index, ERA5_BR_dayclim_mean_df.climSST, color='0.5')
+
 #ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
 #ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
 
-#xfmt = mdates.DateFormatter('%d')
-#ax.xaxis.set_major_formatter(xfmt)
+xfmt = mdates.DateFormatter('%d')
+ax.xaxis.set_major_formatter(xfmt)
 
-#ax.set_xlabel('time')
-#ax.set_ylabel('SST [K]')
+ax.set_xlabel('time')
+ax.set_ylabel('SST [K]')
 #ax.set_title('SST July', fontsize=16)
 
 
 
 #ERA5_BR.SST_std.plot()-ERA5_BR.SST
 #ERA5_BR.groupby(ERA5_BR_df.index.1).mean().plot()
-#f.savefig('SST_Bergen_v2.png')
+f.savefig('SST_Bergen_v2.png')
