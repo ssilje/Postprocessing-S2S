@@ -145,7 +145,7 @@ for month in range(1,13):
                     S2S_BR_dayclim_mean_df = S2S_BR_dayclim_mean_df.append(tmp_mean)   
 
 
-
+print(S2S_BR_dayclim_mean_df.head())
 
 
 
