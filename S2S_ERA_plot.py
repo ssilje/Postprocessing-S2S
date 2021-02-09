@@ -112,38 +112,25 @@ for idate in dates_monday:
                 #tmp_mean = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST","ensstd SST"])
                 S2S_BR_df = S2S_BR_df.append(tmp_mean)   
  
-
-
-        #if i == 0 and y == syr:
-             #   ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
-        #else:
-         #       ERA5_BR_daily = pd.concat([ERA5_BR_daily, dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()])
-    
-    
-S2S_BR_mean = S2S_BR_daily.mean(dim='number')
-ens_std = ds_en.std(dim='number')   
+print(S2S_BR_df.head())
         
 
-S2S = '%s/%s'%(dirbase_S2S,fS2S)
-dataopen_S2S = xr.open_dataset(S2S) 
-S2S_BR = dataopen_S2S.sel(latitude=lat, longitude=lon, method='nearest')
-S2S_BR_df=S2S_BR.to_dataframe()
 
 #SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
-SST_mean=S2S_BR.sst.mean(dim='number') # mean over hindcast date
+#SST_mean=S2S_BR.sst.mean(dim='number') # mean over hindcast date
 
-f, ax = plt.subplots(1, 1)
-ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
-ax.plot(ERA5_BR.time, ERA5_BR.SST-ERA5_BR_std.SST, color='0.5')
-ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
-ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
+#f, ax = plt.subplots(1, 1)
+#ax.plot(ERA5_BR.time, ERA5_BR.SST, color='0.1')
+#ax.plot(ERA5_BR.time, ERA5_BR.SST-ERA5_BR_std.SST, color='0.5')
+#ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
+#ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
 
-xfmt = mdates.DateFormatter('%d')
-ax.xaxis.set_major_formatter(xfmt)
+#xfmt = mdates.DateFormatter('%d')
+#ax.xaxis.set_major_formatter(xfmt)
 
-ax.set_xlabel('time')
-ax.set_ylabel('SST [K]')
-ax.set_title('SST July', fontsize=16)
+#ax.set_xlabel('time')
+#ax.set_ylabel('SST [K]')
+#ax.set_title('SST July', fontsize=16)
 
 
 
