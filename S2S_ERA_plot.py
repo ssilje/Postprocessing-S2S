@@ -119,25 +119,22 @@ print(ERA5_BR_dayclim_mean_df.head())
 for month in range(1,13):
     for y in range(syr,eyr):
         dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
-
+       # print(dates_month)
         for i in range(len(monthcalendar(climyear,month))): # year without leap year
-
             for j in range(len(monthcalendar(climyear,month)[i])):
-
                 if monthcalendar(climyear,month)[i][j] != 0:     
-  
-                    day = '%s'%(monthcalendar(climyear,month)[i][j])
-               
+                    day = '%s'%(monthcalendar(climyear,month)[i][j]
+                    
                     if int(day) < 10:
                         daystr = '0%s'%(day)
-                 
                     else:
                         daystr = '%s'%(day)
-   
+                                
                     date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
+                    print(date)            
                     S2S_BR_day_clim_mean = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].mean()
                     S2S_BR_day_clim_std = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].std()
-        
+                    
                 if int(day) == 1 and month == 1:
                     S2S_BR_dayclim_mean_df = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["climSST"])
                 else:
@@ -151,23 +148,30 @@ print(S2S_BR_dayclim_mean_df.head())
 
 #SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
 #SST_mean=S2S_BR.sst.mean(dim='number') # mean over hindcast date
+#ax[ir,ic] = fig.add_subplot(gs[ir,ic])
 
-f, ax = plt.subplots(1, 1)
-ax.plot(S2S_BR_dayclim_mean_df.index,S2S_BR_dayclim_mean_df.climSST, color='0.1')
-ax.plot(ERA5_BR_dayclim_mean_df.index, ERA5_BR_dayclim_mean_df.climSST, color='0.5')
-
-#ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
-#ax.plot(ERA5_BR.time, ERA5_BR.SST+ERA5_BR_std.SST, color='0.5')
-
+Nrows=2
+Ncols=1
+gs = gridspec.GridSpec(Nrows,Ncols,wspace=0.2,hspace=-0.35)
+ax=np.empty(gs.get_geometry(),dtype=object)
+fig = plt.figure(figsize=(7,12))
+ir=0
+ic=0
+ax[ir,ic] = fig.add_subplot(gs[ir,ic])
+ax[ir,ic].plot(S2S_BR_dayclim_mean_df.index,S2S_BR_dayclim_mean_df.climSST, color='0.1')
 xfmt = mdates.DateFormatter('%d')
-ax.xaxis.set_major_formatter(xfmt)
+ax[ir,ic].xaxis.set_major_formatter(xfmt)
+ax[ir,ic].set_xlabel('time')
+ax[ir,ic].set_ylabel('SST [K]')
 
-ax.set_xlabel('time')
-ax.set_ylabel('SST [K]')
-#ax.set_title('SST July', fontsize=16)
+ir=1
+ic=0
+ax[ir,ic] = fig.add_subplot(gs[ir,ic])
+ax[ir,ic].plot(S2S_BR_dayclim_mean_df.index[:50],S2S_BR_dayclim_mean_df.climSST[:50], color='0.1')
+xfmt = mdates.DateFormatter('%d')
+ax[ir,ic].xaxis.set_major_formatter(xfmt)
+ax[ir,ic].set_xlabel('time')
+ax[ir,ic].set_ylabel('SST [K]')
 
 
-
-#ERA5_BR.SST_std.plot()-ERA5_BR.SST
-#ERA5_BR.groupby(ERA5_BR_df.index.1).mean().plot()
-f.savefig('SST_Bergen_v2.png')
+fig.savefig('SST_Bergen_v2.png')
