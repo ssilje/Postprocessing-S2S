@@ -114,7 +114,39 @@ for idate in dates_monday:
  
 print(S2S_BR_df.head())
 print(ERA5_BR_dayclim_mean_df.head())
+
+
+for month in range(1,13):
+    for y in range(syr,eyr):
+        dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
+
+        for i in range(len(monthcalendar(climyear,month))): # year without leap year
+
+            for j in range(len(monthcalendar(climyear,month)[i])):
+
+                if monthcalendar(climyear,month)[i][j] != 0:     
+  
+                    day = '%s'%(monthcalendar(climyear,month)[i][j])
+               
+                    if int(day) < 10:
+                        daystr = '0%s'%(day)
+                 
+                    else:
+                        daystr = '%s'%(day)
+   
+                    date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
+                    S2S_BR_day_clim_mean = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].mean()
+                    S2S_BR_day_clim_std = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].std()
         
+                if int(day) == 1 and month == 1:
+                    S2S_BR_dayclim_mean_df = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                else:
+                    tmp_mean = pd.DataFrame(S2S_BR_day_clim_mean, index=date, columns=["day-clim SST"])
+                    S2S_BR_dayclim_mean_df = S2S_BR_dayclim_mean_df.append(tmp_mean)   
+
+
+
+
 
 
 #SST_mean2=S2S_BR.sst.mean(dim='hdate') # mean over hindcast date
