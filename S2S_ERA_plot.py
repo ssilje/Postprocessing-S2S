@@ -122,10 +122,14 @@ for month in range(1,13):
         for i in range(len(monthcalendar(climyear,month))): # year without leap year
             for j in range(len(monthcalendar(climyear,month)[i])):
                 if monthcalendar(climyear,month)[i][j] != 0:     
+                    
                     day = '%s'%(monthcalendar(climyear,month)[i][j])         
+                    
                     if int(day) < 10:
+                    
                         daystr = '0%s'%(day)
                     else:
+                        
                         daystr = '%s'%(day)
                                 
                     date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
