@@ -103,12 +103,12 @@ for idate in dates_monday:
             print(fclt)
             if d == "2019-07-01" and dh == "1999-07-01" and fclt == "1999-07-01": # first forecast day
                 S2S_BR_df = pd.DataFrame({"FC-ID": dh, "Lead Time": lt, "ensmeanSST": s2s_mean, "ensstdSST": s2s_std }, 
-                                         index=pd.date_range(fc_lt,periods=1), 
-                                         columns=["FC-ID", "Lead Time", "ensmean SST","ensstd SST"])
+                                         index=pd.date_range(fc_lt,periods=1)) 
+                                       #  columns=["FC-ID", "Lead Time", "ensmean SST","ensstd SST"])
             else:
                 tmp_mean = pd.DataFrame({"FC-ID": dh, "Lead Time": lt, "ensmeanSST": s2s_mean, "ensstdSST": s2s_std }, 
-                                        index=pd.date_range(fc_lt,periods=1), 
-                                        columns=["FC-ID", "Lead Time", "ensmeanSST","ensstdSST"])
+                                        index=pd.date_range(fc_lt,periods=1)) 
+                                       # columns=["FC-ID", "Lead Time", "ensmeanSST","ensstdSST"])
                 #tmp_mean = pd.DataFrame(s2s_mean, index=pd.date_range(hdate,periods=1), columns=["ensmean SST","ensstd SST"])
                 S2S_BR_df = S2S_BR_df.append(tmp_mean)   
  
