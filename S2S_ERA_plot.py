@@ -113,6 +113,7 @@ for idate in dates_monday:
                 S2S_BR_df = S2S_BR_df.append(tmp_mean)   
  
 print(S2S_BR_df.head())
+print(ERA5_BR_dayclim_mean_df.head())
         
 
 
