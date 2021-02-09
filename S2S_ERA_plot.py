@@ -119,12 +119,10 @@ print(ERA5_BR_dayclim_mean_df.head())
 for month in range(1,13):
     for y in range(syr,eyr):
         dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
-       # print(dates_month)
         for i in range(len(monthcalendar(climyear,month))): # year without leap year
             for j in range(len(monthcalendar(climyear,month)[i])):
                 if monthcalendar(climyear,month)[i][j] != 0:     
-                    day = '%s'%(monthcalendar(climyear,month)[i][j]
-                    
+                    day = '%s'%(monthcalendar(climyear,month)[i][j])         
                     if int(day) < 10:
                         daystr = '0%s'%(day)
                     else:
