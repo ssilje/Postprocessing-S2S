@@ -136,4 +136,4 @@ print(S2S_BR_df.head())
 
 #ERA5_BR.SST_std.plot()-ERA5_BR.SST
 #ERA5_BR.groupby(ERA5_BR_df.index.1).mean().plot()
-f.savefig('SST_Bergen_v2.png')
+#f.savefig('SST_Bergen_v2.png')
