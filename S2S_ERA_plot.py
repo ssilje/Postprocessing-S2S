@@ -133,7 +133,8 @@ for month in range(1,13):
                         daystr = '%s'%(day)
                                 
                     date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
-                    print(date)            
+                    print(date) 
+                    print(dates_month)
                     S2S_BR_day_clim_mean = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].mean()
                     S2S_BR_day_clim_std = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].std()
                     
