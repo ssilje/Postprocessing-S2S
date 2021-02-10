@@ -29,7 +29,7 @@ product = 'hindcast' # forecast
 
 syr = 2000
 eyr = 2015
-climyear = 2018
+climyear = 2015
 dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
 
 for month in range(1,13):
@@ -118,12 +118,15 @@ print(ERA5_BR_dayclim_mean_df.head())
 
 for month in range(1,13):
     for y in range(syr,eyr):
-        dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
+       # dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
         for i in range(len(monthcalendar(climyear,month))): # year without leap year
             for j in range(len(monthcalendar(climyear,month)[i])):
                 if monthcalendar(climyear,month)[i][j] != 0:     
-                    
-                    day = '%s'%(monthcalendar(climyear,month)[i][j])         
+                    ## legg inn loop som sjekkar år og mnd
+                    day = '%s'%(monthcalendar(climyear,month)[i][j])
+                    print(day)
+                    print(month)
+                    print(y)
                     
                     if int(day) < 10:
                     
@@ -133,8 +136,8 @@ for month in range(1,13):
                         daystr = '%s'%(day)
                                 
                     date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
-                    print(date) 
-                    print(dates_month)
+                   # print(date) 
+                   # print(dates_month)
                     S2S_BR_day_clim_mean = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].mean()
                     S2S_BR_day_clim_std = S2S_BR_df.ensmeanSST[S2S_BR_df.index.strftime('%d')==daystr].std()
                     
