@@ -39,9 +39,9 @@ for idate in dates_thursday:
     
     dates_hc = pd.date_range((idate-pd.DateOffset(years=20)), periods=20, freq="AS-JUL") #20 years hindcast
     print(dates_hc)
-    for hdate in dates_hc:
-        dh = hdate.strftime('%Y-%m-%d')
-        print(dh)
+    #for hdate in dates_hc:
+        #dh = hdate.strftime('%Y-%m-%d')
+        #print(dh)
         #t2m_CY43R3_CY45R1_2018-05-10_pf.grb 
        
         ## Loop through the whole forecast
