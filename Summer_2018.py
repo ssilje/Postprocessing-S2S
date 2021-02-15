@@ -39,6 +39,7 @@ for idate in dates_monday:
         dS2S = '%s/%s/%s_%s_%s_%s_%s%s'%(dir,var_short,var_short,cycle,d,ftype,dh,'.grb')
         dataopen = xr.open_dataset(dS2S,engine='cfgrib')
         
-        S2S_BR_daily = dataopen.2t.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
+        S2S_BR_daily = dataopen.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
+        print(S2S_BR_daily.head(20))
         ## Loop through the whole forecast
         #forecast_leadtime = pd.date_range(dh, periods=46, freq="D")
