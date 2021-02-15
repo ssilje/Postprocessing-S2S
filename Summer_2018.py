@@ -32,18 +32,17 @@ dates_fcycle = dates_monday.union(dates_thursday)
 
 for idate in dates_thursday: 
     d = idate.strftime('%Y-%m-%d')
-  
+    dS2S = '%s/%s/%s_%s_%s_%s%s'%(dir,var_short,var_short,cycle,d,ftype,'.grb')
+    dataopen = xr.open_dataset(dS2S,engine='cfgrib')
+    S2S_BR_daily = dataopen.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
+    print(S2S_BR_daily.head(20))
+    
     dates_hc = pd.date_range((idate-pd.DateOffset(years=20)), periods=20, freq="AS-JUL") #20 years hindcast
-    #print(dates_hc)
+    print(dates_hc)
     for hdate in dates_hc:
         dh = hdate.strftime('%Y-%m-%d')
         print(dh)
         #t2m_CY43R3_CY45R1_2018-05-10_pf.grb 
-        dS2S = '%s/%s/%s_%s_%s_%s%s'%(dir,var_short,var_short,cycle,d,ftype,'.grb')
-        dataopen = xr.open_dataset(dS2S,engine='cfgrib')
-        
-        S2S_BR_daily = dataopen.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
-       # S2S_BR_daily = dataopen.to_dataframe()
-        print(S2S_BR_daily.head(20))
+       
         ## Loop through the whole forecast
         #forecast_leadtime = pd.date_range(dh, periods=46, freq="D")
