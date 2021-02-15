@@ -36,7 +36,7 @@ for idate in dates_monday:
         dh = hdate.strftime('%Y-%m-%d')
         print(dh)
         #t2m_CY43R3_CY45R1_2018-05-10_pf.grb 
-        dS2S = '%s/%s/%s_%s_%s_%s_%s%s'%(dir,var_short,var_short,cycle,d,ftype,dh,'.grb')
+        dS2S = '%s/%s/%s_%s_%s_%s%s'%(dir,var_short,var_short,cycle,d,ftype,'.grb')
         dataopen = xr.open_dataset(dS2S,engine='cfgrib')
         
         S2S_BR_daily = dataopen.sel(latitude=lat, longitude=lon, method='nearest').to_dataframe()
