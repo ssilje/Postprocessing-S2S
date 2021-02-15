@@ -24,10 +24,10 @@ dir = '%s/%s/%s/'%(dirbase_S2S,product,'/ECMWF/sfc')
 
 dates_monday = pd.date_range("20180426", periods=1, freq="7D") # forecasts start Monday
 #dates_monday = pd.date_range("20180426", periods=20, freq="7D") # forecasts start Monday
-dates_thursday = pd.date_range("20180430", periods=20, freq="7D") # forecasts start Thursday
+dates_thursday = pd.date_range("20180430", periods=1, freq="7D") # forecasts start Thursday
 dates_fcycle = dates_monday.union(dates_thursday)  
 
-for idate in dates_monday: 
+for idate in dates_thursday: 
     d = idate.strftime('%Y-%m-%d')
   
     dates_hc = pd.date_range((idate-pd.DateOffset(years=20)), periods=20, freq="AS-JUL") #20 years hindcast
