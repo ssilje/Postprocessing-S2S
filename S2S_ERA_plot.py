@@ -16,8 +16,8 @@ from calendar import monthrange,  monthcalendar, datetime
 lat = 60.23
 lon = 5.19
 
-var_long='sea_surface_temperature' 
-var_short='sst' 
+var_long='2m_temperature' 
+var_short='t2m' 
 
 # 10m_u_component_of_wind 2m_temperature sea_surface_temperature total_precipitation 10m_v_component_of_wind mean_sea_level_pressure snowfall
 
@@ -30,7 +30,8 @@ product = 'hindcast' # forecast
 syr = 2000
 eyr = 2015
 climyear = 2015
-dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
+#dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
+dirbase = '/nird/projects/NS9853K/DATA/SFE/ERA_daily_nc/'
 
 for month in range(1,13):
     for y in range(syr,eyr):
@@ -40,7 +41,7 @@ for month in range(1,13):
 ## ERA5
         
         for i,d in enumerate(dates_month):
-            dERA5 = '%s/%s_%s_%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'EUR1deg.nc')
+            dERA5 = '%s/%s_%s_%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
             dataopen = xr.open_dataset(dERA5)
             if i == 0 and y == syr:
                 ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
