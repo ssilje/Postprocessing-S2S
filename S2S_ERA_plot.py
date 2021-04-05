@@ -44,7 +44,7 @@ for month in range(1,13):
             dERA5 = '%s/%s_%s%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
             dataopen = xr.open_dataset(dERA5)
             if i == 0 and y == syr:
-                ERA5_BR_daily = dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
+                ERA5_BR_daily = dataopen.t2m.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
             else:
                 ERA5_BR_daily = pd.concat([ERA5_BR_daily, dataopen.sst.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()])
 
@@ -63,13 +63,13 @@ for month in range(1,13):
                     daystr = '%s'%(day)
    
                 date = pd.date_range(datetime.date(climyear, month, int(day)),periods=1)
-                ERA5_BR_day_clim_mean = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].mean()
-                ERA5_BR_day_clim_std = ERA5_BR_daily.sst[ERA5_BR_daily.index.strftime('%d')==daystr].std()
+                ERA5_BR_day_clim_mean = ERA5_BR_daily.t2m[ERA5_BR_daily.index.strftime('%d')==daystr].mean()
+                ERA5_BR_day_clim_std = ERA5_BR_daily.t2m[ERA5_BR_daily.index.strftime('%d')==daystr].std()
         
                 if int(day) == 1 and month == 1:
-                    ERA5_BR_dayclim_mean_df = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["climSST"])
+                    ERA5_BR_dayclim_mean_df = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["climt2m"])
                 else:
-                    tmp_mean = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["climSST"])
+                    tmp_mean = pd.DataFrame(ERA5_BR_day_clim_mean, index=date, columns=["climt2m"])
                     ERA5_BR_dayclim_mean_df = ERA5_BR_dayclim_mean_df.append(tmp_mean)   
 
                     
