@@ -38,16 +38,16 @@ def read_ERA5_timeseries(
     daymean,
 ):
     if end_date is False:
-        date=pd.date_range(start_date,periods=1,freq="D")
-        file = '%s/%s_%s%s'%(dirbase,var_long,date.strftime('%Y%m%d'),'.nc')
+        
+        file = '%s/%s_%s%s'%(dirbase,var_long,start_date,'.nc')
         dataopen = xr.open_dataset(file)
         if daymean is True:
             ERA5 = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).resample(time='D').mean()
         else:
             ERA5 = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1]))
     else:
-        
-        for d in  pd.date_range(start_date, end_date):
+        date=pd.date_range(start_date, end_date)
+        for d in date:
             file = '%s/%s_%s%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
             dataopen = xr.open_dataset(file)
             if daymean is True:
@@ -77,7 +77,14 @@ climyear = 2015
 #dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
 dirbase = '/nird/projects/NS9853K/DATA/SFE/ERA_daily_nc/'
 
-
+data=read_ERA5_timeseries(
+    dirbase='/nird/projects/NS9853K/DATA/SFE/ERA_daily_nc/',
+    var_long='2m_temperature' ,
+    start_date='20000501',
+    end_date='20000520',
+    lat=[60,40],
+    lon=[0, 10],
+    daymean=True)
 
 for month in range(1,13):
     for y in range(syr,eyr):
