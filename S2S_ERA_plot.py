@@ -4,7 +4,7 @@
 Created on Mon Jan 18 18:43:49 2021
 @author: siljesorland
 """
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import xarray as xr
 import cartopy.crs as ccrs
 import pandas as pd
@@ -12,18 +12,50 @@ import matplotlib.dates as mdates
 import numpy as np
 from calendar import monthrange,  monthcalendar, datetime
 
-# Bergen
-lat = 60.23
-lon = 5.19
+def read_ERA5_day(
+    dirbase,
+    var_long,
+    date,
+    lat,
+    lon,
+    daymean,
+):
+    file = '%s/%s_%s%s'%(dirbase,var_long,date.strftime('%Y%m%d'),'.nc')
+    dataopen = xr.open_dataset(file)
+    if daymean is True:
+        ERA5 = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).resample(time='D').mean()
+    else:
+        ERA5 = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1]))
+    return ERA5
+
+def read_ERA5_timeseries(
+    dirbase,
+    var_long,
+    date,
+    lat,
+    lon,
+    daymean,
+):
+    for d in date:
+        file = '%s/%s_%s%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
+        dataopen = xr.open_dataset(file)
+        if daymean is True:
+            data_df = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).resample(time='D').mean().to_dataframe()
+        else:
+            data_df = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).to_dataframe()
+        
+        if d == date[0]:
+            ERA5_df = data_df
+        else: 
+            ERA5_df=ERA5_df.append(data_df)
+        ERA5=ERA5_df.to_xarray() 
+    return ERA5
+
+
 
 var_long='2m_temperature' 
 var_short='t2m' 
 
-# 10m_u_component_of_wind 2m_temperature sea_surface_temperature total_precipitation 10m_v_component_of_wind mean_sea_level_pressure snowfall
-
-cycle = 'CY46R1'
-ftype= 'pf'
-product = 'hindcast' # forecast
 
 
 
@@ -33,16 +65,20 @@ climyear = 2015
 #dirbase = '/nird/projects/NS9001K/sso102/DATA/test'
 dirbase = '/nird/projects/NS9853K/DATA/SFE/ERA_daily_nc/'
 
+
+
 for month in range(1,13):
     for y in range(syr,eyr):
         dates_month = pd.date_range(start='%s-%s-%s'%(y,month,'01'), periods=monthrange(y, month)[1], freq="D") 
-        #print(dates_month)
-#
-## ERA5
-        
+       
         for i,d in enumerate(dates_month):
-            dERA5 = '%s/%s_%s%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
-            dataopen = xr.open_dataset(dERA5)
+            data=read_ERA5_daily(dirbase,
+                            var_long,
+                            date, 
+                            lat, 
+                            lon, 
+                            daymean=True)
+           
             if i == 0 and y == syr:
                 ERA5_BR_daily = dataopen.t2m.sel(lat=lat, lon=lon, method='nearest').resample(time='D').mean().to_dataframe()
             else:
