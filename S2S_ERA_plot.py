@@ -38,6 +38,7 @@ def read_ERA5_timeseries(
     daymean,
 ):
     if end_date is False:
+        date=pd.date_range(start_date,periods=1,freq="D")
         file = '%s/%s_%s%s'%(dirbase,var_long,date.strftime('%Y%m%d'),'.nc')
         dataopen = xr.open_dataset(file)
         if daymean is True:
