@@ -31,24 +31,35 @@ def read_ERA5_day(
 def read_ERA5_timeseries(
     dirbase,
     var_long,
-    date,
+    start_date,
+    end_date,
     lat,
     lon,
     daymean,
 ):
-    for d in date:
-        file = '%s/%s_%s%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
+    if end_date is False:
+        file = '%s/%s_%s%s'%(dirbase,var_long,date.strftime('%Y%m%d'),'.nc')
         dataopen = xr.open_dataset(file)
         if daymean is True:
-            data_df = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).resample(time='D').mean().to_dataframe()
+            ERA5 = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).resample(time='D').mean()
         else:
-            data_df = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).to_dataframe()
+            ERA5 = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1]))
+    else:
         
-        if d == date[0]:
-            ERA5_df = data_df
-        else: 
-            ERA5_df=ERA5_df.append(data_df)
-        ERA5=ERA5_df.to_xarray() 
+        for d in  pd.date_range(start_date, end_date):
+            file = '%s/%s_%s%s'%(dirbase,var_long,d.strftime('%Y%m%d'),'.nc')
+            dataopen = xr.open_dataset(file)
+            if daymean is True:
+                data_df = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).resample(time='D').mean().to_dataframe()
+            else:
+                data_df = dataopen.sel(latitude=slice(lat[0],lat[1]),longitude=slice(lon[0],lon[1])).to_dataframe()
+        
+            if d == date[0]:
+                ERA5_df = data_df
+            else: 
+                ERA5_df=ERA5_df.append(data_df)
+            ERA5=ERA5_df.to_xarray() 
+        
     return ERA5
 
 
